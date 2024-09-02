@@ -17,3 +17,4 @@ struct RecipeStep:Identifiable{
 var Descriprion_Example = "This is a sample step"
 var Skills_Example = ["Slice"]
 var Tools_Example = ["Pan"]
+var Time_Example = [StepTime(value: 5.0, unit: .minutes)]
