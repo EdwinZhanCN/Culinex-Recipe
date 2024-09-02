@@ -1,7 +1,7 @@
 import Foundation
 
-struct Ingredient: Identifiable{
+class Ingredient: Identifiable{
     var id:UUID = UUID()
-    var name:String
+    var name:String = ""
 }
 

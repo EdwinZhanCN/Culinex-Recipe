@@ -1,8 +1,8 @@
 import Foundation
 
-struct Category: Identifiable{
-    var id:UUID
-    var name:String
-    var Recipes:[Recipe]
+class Category: Identifiable{
+    var id:UUID = UUID()
+    var name:String = ""
+    var Recipes:[Recipe] = []
 }
 

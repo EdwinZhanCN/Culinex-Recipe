@@ -1,7 +1,7 @@
 import Foundation
 
-struct FavoriteItem: Identifiable{
+class FavoriteItem: Identifiable{
     var id:UUID = UUID()
-    var name:String
-    var recipes:[Recipe]
+    var name:String = ""
+    var recipes:[Recipe] = []
 }
