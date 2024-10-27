@@ -11,5 +11,6 @@ class IngredientsViewModel:ObservableObject{
 
 var Ingredient_example = [
     Ingredient(name: "Tomato", image: "tomato"),
-    Ingredient(name: "Egg", image: "egg")
+    Ingredient(name: "Egg", image: "egg"),
+    Ingredient(name: "Cucumber", image: "cucumber"),
 ]
