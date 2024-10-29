@@ -16,7 +16,7 @@
 		31C97E792B755E2D00A69DF7 /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E702B755E2D00A69DF7 /* RecipesViewModel.swift */; };
 		31C97E7A2B755E2D00A69DF7 /* MyIngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E712B755E2D00A69DF7 /* MyIngredientsView.swift */; };
 		31C97E7B2B755E2D00A69DF7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E722B755E2D00A69DF7 /* TimerView.swift */; };
-		31C97E7C2B755E2D00A69DF7 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E732B755E2D00A69DF7 /* RecipeView.swift */; };
+		31C97E7C2B755E2D00A69DF7 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E732B755E2D00A69DF7 /* RecipeDetailView.swift */; };
 		31C97E7D2B755E2D00A69DF7 /* AddFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E742B755E2D00A69DF7 /* AddFavoriteView.swift */; };
 		31C97E7E2B755E2D00A69DF7 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E752B755E2D00A69DF7 /* FavoritesViewModel.swift */; };
 		31C97E7F2B755E2D00A69DF7 /* RecipesLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E762B755E2D00A69DF7 /* RecipesLibraryView.swift */; };
@@ -40,7 +40,7 @@
 		31C97E702B755E2D00A69DF7 /* RecipesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
 		31C97E712B755E2D00A69DF7 /* MyIngredientsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyIngredientsView.swift; sourceTree = "<group>"; };
 		31C97E722B755E2D00A69DF7 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		31C97E732B755E2D00A69DF7 /* RecipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		31C97E732B755E2D00A69DF7 /* RecipeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		31C97E742B755E2D00A69DF7 /* AddFavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteView.swift; sourceTree = "<group>"; };
 		31C97E752B755E2D00A69DF7 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		31C97E762B755E2D00A69DF7 /* RecipesLibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesLibraryView.swift; sourceTree = "<group>"; };
@@ -64,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		310772BC2CD0785600DD774E /* RecipeComponents */ = {
+			isa = PBXGroup;
+			children = (
+				31C97E732B755E2D00A69DF7 /* RecipeDetailView.swift */,
+			);
+			path = RecipeComponents;
+			sourceTree = "<group>";
+		};
 		31C97E542B755C2B00A69DF7 = {
 			isa = PBXGroup;
 			children = (
@@ -105,9 +113,9 @@
 		31C97E822B755E3700A69DF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				310772BC2CD0785600DD774E /* RecipeComponents */,
 				31C97E852B755E8400A69DF7 /* SiderBarView */,
 				31C97E622B755C2B00A69DF7 /* ContentView.swift */,
-				31C97E732B755E2D00A69DF7 /* RecipeView.swift */,
 				31C97E742B755E2D00A69DF7 /* AddFavoriteView.swift */,
 			);
 			path = View;
@@ -235,7 +243,7 @@
 				31C97E7A2B755E2D00A69DF7 /* MyIngredientsView.swift in Sources */,
 				31C97E7E2B755E2D00A69DF7 /* FavoritesViewModel.swift in Sources */,
 				31C97E8D2B755EE200A69DF7 /* Category.swift in Sources */,
-				31C97E7C2B755E2D00A69DF7 /* RecipeView.swift in Sources */,
+				31C97E7C2B755E2D00A69DF7 /* RecipeDetailView.swift in Sources */,
 				31C97E7D2B755E2D00A69DF7 /* AddFavoriteView.swift in Sources */,
 				31C97E812B755E2D00A69DF7 /* OverviewView.swift in Sources */,
 				31C97E632B755C2B00A69DF7 /* ContentView.swift in Sources */,
