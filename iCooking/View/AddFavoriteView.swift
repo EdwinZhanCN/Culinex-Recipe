@@ -1,8 +1,12 @@
 import SwiftUI
+import SwiftData
 
 
 
 struct AddFavoriteView: View{
+    @Query var favorites:[FavoriteItem]
+    @Environment(\.modelContext) var context
+        
     //Initialized
     @State var addedRecipes:[Recipe] = []
     
@@ -20,8 +24,7 @@ struct AddFavoriteView: View{
     //Uninitialized
     //The variable used to quit
     @Binding var isPresented:Bool
-    @StateObject var favoriteViewModel:FavoriteViewModel
-    @StateObject var recipesViewModel:RecipesViewModel
+    
     
     var body: some View{
         VStack{
@@ -51,15 +54,21 @@ struct AddFavoriteView: View{
                 
                 Button(action: {
                     if !addedRecipes.isEmpty {
-                        if favoriteName.isEmpty{
-                            favoriteName = "New Favorit \(favoriteViewModel.favorites.count + 1)"
+                        if favoriteName.isEmpty {
+                            favoriteName = "New Favorite \(favorites.count + 1)"
                         }
-                        favoriteViewModel.addFavorite(name: favoriteName, recipes: addedRecipes)
+                        // 引用现有的 Recipe 而不是重复插入
+                        let newFavorite = FavoriteItem(name: favoriteName, recipes: addedRecipes)
+                        context.insert(newFavorite)
+                        do {
+                            try context.save()
+                        } catch {
+                            print("Data not saved")
+                        }
                         isPresented = false
                     } else {
                         showAlert.toggle()
                     }
-
                 }, label: {
                     Text("Save")
                 })
@@ -128,11 +137,13 @@ struct AddFavoriteView: View{
                 .presentationDetents([.medium,.large])
                 .presentationDragIndicator(.visible)
         }
+
     }
 }
 
 
 struct BottomSheetView:View{
+    @Query var recipesLibrary:[Recipe]
     @State private var searchQuery = ""
     @State private var selectedRecipes = Set<UUID>()
     @Binding var isPresented: Bool
@@ -178,9 +189,9 @@ struct BottomSheetView:View{
     
     var filteredRecipes:[Recipe]{
         if searchQuery.isEmpty{
-            return RecipesViewModel().recipesLibrary
+            return recipesLibrary
         }else{
-            return RecipesViewModel().recipesLibrary.filter{ recipe in
+            return recipesLibrary.filter{ recipe in
                 recipe.name.localizedStandardContains(searchQuery)
             }
         }

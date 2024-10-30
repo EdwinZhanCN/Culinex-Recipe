@@ -1,7 +1,8 @@
 import SwiftUI
+import SwiftData
 
 struct RecipesLibraryView: View{
-    @StateObject private var recipesViewModel = RecipesViewModel()
+    @Query(sort: \Recipe.name)var recipesLibrary: [Recipe]
     
     let columns = [
             GridItem(.flexible(), spacing: 10),
@@ -13,8 +14,8 @@ struct RecipesLibraryView: View{
     var body: some View{
         ScrollView {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(recipesViewModel.recipesLibrary) { item in
-                    let color = Color.dynamicColor(for: item.name)
+                ForEach(recipesLibrary) { recipe in
+                    let color = Color.dynamicColor(for: recipe.name)
                     VStack{
                         ZStack {
                             color
@@ -29,7 +30,7 @@ struct RecipesLibraryView: View{
                                 .foregroundColor(.white)
                                 .font(.headline)
                         }
-                        Text(item.name)
+                        Text(recipe.name)
                             .font(.subheadline)
                     }
                     .frame(maxWidth: 170)
@@ -53,5 +54,6 @@ extension Color {
 
 #Preview{
     RecipesLibraryView()
+        .modelContainer(previewContainer)
 }
 

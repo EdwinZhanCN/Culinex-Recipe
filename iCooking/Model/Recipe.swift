@@ -1,16 +1,26 @@
 import Foundation
+import SwiftData
 
+@Model
 class Recipe: Identifiable{
-    var id:UUID = UUID()
-    var name:String = ""
-    var ingredients:[Ingredient] = []
-    var steps:[RecipeStep] = []
+    @Attribute(.unique) var id: UUID
+//Migration Hint: @Attribute(originalName: "customname") var name: String
+    var name: String
+    var ingredients:[Ingredient]? = []
+    
+    @Relationship(deleteRule: .cascade)
+    var steps:[RecipeStep]? = []
+    
+    @Transient
+    var recipeViews: Int = 0
     
     init(
+        id: UUID = UUID(),
         name: String,
         ingredients: [Ingredient],
         steps: [RecipeStep]
     ) {
+        self.id = id
         self.name = name
         self.ingredients = ingredients
         self.steps = steps

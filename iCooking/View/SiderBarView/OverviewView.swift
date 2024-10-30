@@ -1,14 +1,10 @@
 import SwiftUI
 
 struct OverviewView: View{
-    @StateObject var recipesViewModel:RecipesViewModel
     var body: some View{
         Divider()
             .background(Color(.systemGray6))
         GeometryReader { geometry in
-            ZStack{
-                
-            }
             VStack{
                 Image("Banner2")
                     .resizable()

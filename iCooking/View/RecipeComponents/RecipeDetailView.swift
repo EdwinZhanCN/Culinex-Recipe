@@ -6,7 +6,6 @@ struct RecipeDetailView: View {
     
     var body: some View {
         HStack(spacing:0){
-            // 左侧步骤区域 (4/5 宽度)
             VStack (spacing:0){
                 HStack{
                     HStack{

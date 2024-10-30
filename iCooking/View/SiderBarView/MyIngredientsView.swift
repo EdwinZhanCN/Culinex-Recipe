@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 
 /// The IngredientsView takes the array of ingredients from viewmodel and pass it to the smaller components
@@ -16,14 +17,14 @@ struct MyIngredientsView: View{
         #endif
     }
     
-    @StateObject var ingredientsViewModel: IngredientsViewModel = IngredientsViewModel()
+    @Query var ingredients:[Ingredient]
     
     @State private var searchText: String = ""
     var filteredIngredients: [Ingredient] {
         if searchText.isEmpty {
-            return ingredientsViewModel.ingredients
+            return ingredients
         } else {
-            return ingredientsViewModel.ingredients.filter { ingredient in
+            return ingredients.filter { ingredient in
                 ingredient.name.localizedCaseInsensitiveContains(searchText)
             }
         }
@@ -65,8 +66,7 @@ struct MyIngredientsView: View{
             .listStyle(PlainListStyle())
             .sheet(isPresented: $showAddIngredient, content: {
                 AddIngredientView(
-                    isPresented: $showAddIngredient,
-                    ingredientsViewModel: ingredientsViewModel
+                    isPresented: $showAddIngredient
                 )
             })
         }
@@ -132,7 +132,10 @@ struct AddButton: View{
 
 struct AddIngredientView: View{
     @Binding var isPresented: Bool
-    @StateObject var ingredientsViewModel: IngredientsViewModel
+    
+    //data
+    @Query var ingredients:[Ingredient]
+    @Environment(\.modelContext) var context:ModelContext
     @State var isAlertPresented:Bool = false
     @State var ingredientName:String = ""
     var body: some View{
@@ -181,20 +184,19 @@ struct AddIngredientView: View{
                 }
                 .frame(width: 150)
                 .padding(.leading, 55)
-                .alert(isPresented: $isAlertPresented) {
-                    Alert(
-                        title: Text("Error"),
-                        message: Text("Please enter an ingredient name"),
-                        dismissButton: .default(Text("OK"))
-                    )
-                }
+            
                 Spacer()
                 Button {
                     if ingredientName.isEmpty{
                         isAlertPresented.toggle()
                     }else{
-                        ingredientsViewModel.ingredients.append(Ingredient(name: ingredientName, image: nil))
-                        isPresented.toggle()
+                        context.insert(Ingredient(name: ingredientName))
+                        do{
+                            try context.save()
+                            isPresented.toggle()
+                        }catch{
+                            print("data not saved")
+                        }
                     }
                 } label: {
                     Text("Done")
@@ -209,12 +211,11 @@ struct AddIngredientView: View{
                 .padding(.trailing,50)
                 .alert(isPresented: $isAlertPresented) {
                     Alert(
-                        title: Text("Hi"),
-                        message: Text("You forget to enter an ingredient name"),
+                        title: Text("Hey!"),
+                        message: Text("You forget to enter an ingredient name!"),
                         dismissButton: .default(Text("OK"))
                     )
                 }
-                
 
             }
 
@@ -225,4 +226,5 @@ struct AddIngredientView: View{
 
 #Preview {
     MyIngredientsView()
+        .modelContainer(previewContainer)
 }

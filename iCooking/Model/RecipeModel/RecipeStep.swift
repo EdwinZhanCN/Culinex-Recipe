@@ -6,17 +6,48 @@
 //
 
 import Foundation
+import SwiftData
 
-struct RecipeStep:Identifiable{
-    var id:UUID = UUID()
-    var ingredients:[Ingredient] = []
-    var description:String = "No description"
-    var skills:[String] = []
-    var tools:[String] = []
-    var duration:[StepTime] = []
+@Model
+class RecipeStep: Identifiable {
+    var id: UUID = UUID()
+    
+    @Relationship(deleteRule: .cascade)
+    var ingredients: [Ingredient]
+    var descrip: String
+    var skills: [String]
+    var tools: [String]
+    
+    // 用于表示 StepTime 的属性
+    var durationValue: Double
+    var durationUnit: UnitOfTime
+
+    init(
+        id: UUID = UUID(),
+        ingredients: [Ingredient],
+        description: String,
+        skills: [String],
+        tools: [String],
+        duration: StepTime
+    ) {
+        self.id = id
+        self.ingredients = ingredients
+        self.descrip = description
+        self.skills = skills
+        self.tools = tools
+        self.durationValue = duration.value
+        self.durationUnit = duration.unit
+    }
+
+    // 计算属性，用于返回 StepTime 结构体
+    var duration: StepTime {
+        get {
+            StepTime(value: durationValue, unit: durationUnit)
+        }
+        set {
+            durationValue = newValue.value
+            durationUnit = newValue.unit
+        }
+    }
 }
 
-var Descriprion_Example = "Using knife to chop the tomatoes on the chopping board."
-var Skills_Example = ["Chop"]
-var Tools_Example = ["Knife", "Chopping Board"]
-var Time_Example = [StepTime(value: 5.0, unit: .minute)]
