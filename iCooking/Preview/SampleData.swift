@@ -23,14 +23,14 @@ let sampleSteps: [RecipeStep] = [
         description: "Chop tomatoes and onions",
         skills: ["Chopping"],
         tools: ["Knife", "Cutting Board"],
-        duration: StepTime(value: 5, unit: .minute)
+        duration: StepTime(value: 5, unit: .min)
     ),
     RecipeStep(
         ingredients: [sampleIngredients[2], sampleIngredients[3]],
         description: "Crush garlic and basil",
         skills: ["Crushing"],
         tools: ["Mortar and Pestle"],
-        duration: StepTime(value: 3, unit: .minute)
+        duration: StepTime(value: 3, unit: .min)
     )
 ]
 

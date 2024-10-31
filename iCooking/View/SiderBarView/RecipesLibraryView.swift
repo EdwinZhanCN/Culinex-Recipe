@@ -10,33 +10,41 @@ struct RecipesLibraryView: View{
             GridItem(.flexible(), spacing: 10)
     ]
     
+    @State var searchText: String = ""
+    
     
     var body: some View{
+        
         ScrollView {
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(recipesLibrary) { recipe in
                     let color = Color.dynamicColor(for: recipe.name)
-                    VStack{
-                        ZStack {
-                            color
-                                .frame(width: 150, height: 200)
-                                .cornerRadius(8)
-                            
-                            Image(systemName: "carrot")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 200)
-                                .scaleEffect(0.8)
-                                .foregroundColor(.white)
-                                .font(.headline)
+                    NavigationLink{
+                        RecipeDetailView(recipe: recipe)
+                    } label: {
+                        VStack{
+                            ZStack {
+                                color
+                                    .frame(width: 150, height: 200)
+                                    .cornerRadius(8)
+                                
+                                Image(systemName: "carrot")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 200)
+                                    .scaleEffect(0.8)
+                                    .foregroundColor(.white)
+                                    .font(.headline)
+                            }
+                            Text(recipe.name)
+                                .font(.subheadline)
                         }
-                        Text(recipe.name)
-                            .font(.subheadline)
+                        .frame(maxWidth: 170)
                     }
-                    .frame(maxWidth: 170)
-                        
                 }
             }
+            .navigationTitle("Recipes Library")
+            .searchable(text: $searchText)
             .padding()
         }
     }

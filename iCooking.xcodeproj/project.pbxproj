@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		313002A32CCDC5B000D02A88 /* StepTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313002A22CCDC5B000D02A88 /* StepTime.swift */; };
+		31A2E8A02CD2C63D002B54E6 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2E89F2CD2C63B002B54E6 /* Test.swift */; };
 		31C97E612B755C2B00A69DF7 /* iCookingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E602B755C2B00A69DF7 /* iCookingApp.swift */; };
 		31C97E632B755C2B00A69DF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E622B755C2B00A69DF7 /* ContentView.swift */; };
 		31C97E672B755C2C00A69DF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31C97E662B755C2C00A69DF7 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		313002A22CCDC5B000D02A88 /* StepTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StepTime.swift; path = /Users/zhanzihao/Documents/StepTime.swift; sourceTree = "<absolute>"; };
+		31A2E89F2CD2C63B002B54E6 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		31C97E5D2B755C2B00A69DF7 /* iCooking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCooking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31C97E602B755C2B00A69DF7 /* iCookingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCookingApp.swift; sourceTree = "<group>"; };
 		31C97E622B755C2B00A69DF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		31C97E5F2B755C2B00A69DF7 /* iCooking */ = {
 			isa = PBXGroup;
 			children = (
+				31A2E89F2CD2C63B002B54E6 /* Test.swift */,
 				31E599882CD1E92E0009CB53 /* Support */,
 				31E599812CD1E3DF0009CB53 /* Preview */,
 				31C97E842B755E4700A69DF7 /* Model */,
@@ -237,6 +240,7 @@
 				31C97E7F2B755E2D00A69DF7 /* RecipesLibraryView.swift in Sources */,
 				31E4D1482B7AACA000BA7966 /* RecipeStep.swift in Sources */,
 				31C97E7B2B755E2D00A69DF7 /* TimerView.swift in Sources */,
+				31A2E8A02CD2C63D002B54E6 /* Test.swift in Sources */,
 				31C97E8B2B755EE200A69DF7 /* Ingredient.swift in Sources */,
 				313002A32CCDC5B000D02A88 /* StepTime.swift in Sources */,
 				31C97E7A2B755E2D00A69DF7 /* MyIngredientsView.swift in Sources */,

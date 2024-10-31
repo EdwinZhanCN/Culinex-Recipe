@@ -33,13 +33,6 @@ struct MyIngredientsView: View{
     @State private var showAddIngredient: Bool = false
     
     var body: some View{
-        NavigationStack{
-            // search bar
-            TextField("Search Ingredients", text: $searchText)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .padding(.horizontal, 16)
             ScrollView{
                 LazyVGrid(columns: columns, spacing: 16){
                     ForEach(filteredIngredients){ ingredient in
@@ -63,13 +56,12 @@ struct MyIngredientsView: View{
                 .padding(.trailing, 16)
             }
             .navigationTitle("Ingredients Library")
-            .listStyle(PlainListStyle())
+            .searchable(text: $searchText)
             .sheet(isPresented: $showAddIngredient, content: {
                 AddIngredientView(
                     isPresented: $showAddIngredient
                 )
             })
-        }
     }
 }
 

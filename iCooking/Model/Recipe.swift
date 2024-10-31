@@ -6,10 +6,9 @@ class Recipe: Identifiable{
     @Attribute(.unique) var id: UUID
 //Migration Hint: @Attribute(originalName: "customname") var name: String
     var name: String
-    var ingredients:[Ingredient]? = []
-    
+    var ingredients:[Ingredient]
     @Relationship(deleteRule: .cascade)
-    var steps:[RecipeStep]? = []
+    var steps:[RecipeStep]
     
     @Transient
     var recipeViews: Int = 0
@@ -17,12 +16,12 @@ class Recipe: Identifiable{
     init(
         id: UUID = UUID(),
         name: String,
-        ingredients: [Ingredient],
-        steps: [RecipeStep]
+        ingredients: [Ingredient]? = [],
+        steps: [RecipeStep]? = []
     ) {
         self.id = id
         self.name = name
-        self.ingredients = ingredients
-        self.steps = steps
+        self.ingredients = ingredients!
+        self.steps = steps!
     }
 }

@@ -12,7 +12,6 @@ import SwiftData
 class RecipeStep: Identifiable {
     var id: UUID = UUID()
     
-    @Relationship(deleteRule: .cascade)
     var ingredients: [Ingredient]
     var descrip: String
     var skills: [String]
