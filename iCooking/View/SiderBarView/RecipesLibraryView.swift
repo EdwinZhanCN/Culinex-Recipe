@@ -7,46 +7,93 @@ struct RecipesLibraryView: View{
     let columns = [
             GridItem(.flexible(), spacing: 10),
             GridItem(.flexible(), spacing: 10),
+            GridItem(.flexible(), spacing: 10),
             GridItem(.flexible(), spacing: 10)
     ]
     
     @State var searchText: String = ""
     
+    // Add computed property for filtered recipes
+    var filteredRecipes: [Recipe] {
+        if searchText.isEmpty {
+            return recipesLibrary
+        } else {
+            return recipesLibrary.filter { recipe in
+                recipe.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
     
     var body: some View{
         
         ScrollView {
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(recipesLibrary) { recipe in
-                    let color = Color.dynamicColor(for: recipe.name)
+                ForEach(filteredRecipes) { recipe in
                     NavigationLink{
                         RecipeDetailView(recipe: recipe)
                     } label: {
-                        VStack{
-                            ZStack {
-                                color
-                                    .frame(width: 150, height: 200)
-                                    .cornerRadius(8)
-                                
-                                Image(systemName: "carrot")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 150, height: 200)
-                                    .scaleEffect(0.8)
-                                    .foregroundColor(.white)
-                                    .font(.headline)
-                            }
-                            Text(recipe.name)
-                                .font(.subheadline)
-                        }
-                        .frame(maxWidth: 170)
+                        RecipeCardView(recipe: recipe)
                     }
+                }
+                NavigationLink{
+                    RecipeCreationView()
+                } label: {
+                    RecipeAddCardView()
                 }
             }
             .navigationTitle("Recipes Library")
             .searchable(text: $searchText)
             .padding()
         }
+    }
+}
+
+struct RecipeCardView: View {
+    var recipe: Recipe
+    
+    var body: some View {
+        VStack{
+            ZStack {
+                Color.dynamicColor(for: recipe.name)
+                    .frame(width: 150, height: 200)
+                    .cornerRadius(8)
+                
+                Image(systemName: "carrot")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 200)
+                    .scaleEffect(0.8)
+                    .foregroundColor(.white)
+                    .font(.headline)
+            }
+            Text(recipe.name)
+                .font(.subheadline)
+        }
+        .frame(maxWidth: 170)
+    }
+}
+
+
+struct RecipeAddCardView: View {
+    var body: some View {
+        VStack{
+            ZStack {
+                Color.gray
+                    .frame(width: 150, height: 200)
+                    .cornerRadius(8)
+                
+                Image(systemName: "plus")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 200)
+                    .scaleEffect(0.8)
+                    .foregroundColor(.white)
+                    .font(.headline)
+            }
+            Text("New Recipe")
+                .font(.subheadline)
+        }
+        .frame(maxWidth: 170)
     }
 }
 

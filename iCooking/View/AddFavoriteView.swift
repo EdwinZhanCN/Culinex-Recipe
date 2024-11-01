@@ -1,200 +1,179 @@
 import SwiftUI
 import SwiftData
 
-
-
-struct AddFavoriteView: View{
-    @Query var favorites:[FavoriteItem]
+struct AddFavoriteView: View {
+    @Query var favorites: [FavoriteItem]
     @Environment(\.modelContext) var context
+    @Environment(\.dismiss) var dismiss
         
-    //Initialized
-    @State var addedRecipes:[Recipe] = []
-    
-    @State var favoriteName:String = ""
-    
-    //The variable used to quit the sheet
-    @State private var isPresentSheet:Bool = false
-    
-    //The variable that used to determine which recipes should be added into array
-    @State private var multiSelection = Set<UUID>()
-    
-    //The alter toggle
+    @State private var favoriteName: String = ""
+    @State private var showBottomSheet: Bool = false
     @State private var showAlert = false
+    @State private var selectedRecipes: [Recipe] = []
     
-    //Uninitialized
-    //The variable used to quit
-    @Binding var isPresented:Bool
+    @Binding var isPresented: Bool
     
-    
-    var body: some View{
-        VStack{
-            HStack(alignment:.firstTextBaseline){
-                Button(action: {
-                    isPresented.toggle()
-                }, label: {
-                    Text("Cancel")
-                })
-                .padding(.leading,10)
-                
-                Spacer()
-                
-                HStack{
-                    Image(systemName: "heart")
-                        .foregroundStyle(Color.red)
-                        .padding(.leading, 8)
-                    TextField("New favorite",text: $favoriteName)
-                        .font(.title)
-                        .frame(width:200,alignment: .center)
-                        .padding(5)
-                }
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
-                
-                Spacer()
-                
-                Button(action: {
-                    if !addedRecipes.isEmpty {
-                        if favoriteName.isEmpty {
-                            favoriteName = "New Favorite \(favorites.count + 1)"
-                        }
-                        // 引用现有的 Recipe 而不是重复插入
-                        let newFavorite = FavoriteItem(name: favoriteName, recipes: addedRecipes)
-                        context.insert(newFavorite)
-                        do {
-                            try context.save()
-                        } catch {
-                            print("Data not saved")
-                        }
-                        isPresented = false
+    var body: some View {
+        if isPresented{
+            NavigationView {
+                VStack {
+                    // Recipe List Section
+                    if selectedRecipes.isEmpty {
+                        emptyStateView
                     } else {
-                        showAlert.toggle()
+                        recipeListView
                     }
-                }, label: {
-                    Text("Save")
-                })
-                .padding(.trailing, 10)
-                .buttonStyle(.bordered)
-                .foregroundStyle(Color.blue)
-                
-            }
-            .padding(.top, 10)
-            .padding(.bottom,10)
-            
-            Divider()
-            ZStack{
-                if(addedRecipes.isEmpty){
-                    VStack{
-                        Section(content: {
-                            Button(action: {
-                                isPresentSheet = true
-                            }, label: {
-                                HStack{
-                                    Image(systemName: "plus.circle.fill")
-                                    Text("Add recipe")
-                                        .font(.title3)
-                                }
-                                
-                            })
-                            .foregroundStyle(Color.blue)
-                            .buttonStyle(.bordered)
-                            
-                        }, header: { 
-                            Text("Create a collection of your favorite recipes!")
-                                .foregroundStyle(Color(.gray))
-                                .bold()
-                        })
-                        .transition(AnyTransition.opacity.animation(.easeIn))
+                    
+                    Spacer()
+                }
+                .navigationTitle("New Favorite")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
-                }else{
-                    VStack{
-                        HStack{
-                            Spacer()
-                            EditButton()
-                                .padding(.trailing, 8)
+                    
+                    ToolbarItem(placement: .principal) {
+                        TextField("Favorite Name", text: $favoriteName)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 200)
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            saveNewFavorite()
                         }
-                        List{
-                            ForEach(addedRecipes){recipe in
-                                Text(recipe.name)
-                            }
-                            .onDelete { offsets in
-                                addedRecipes.remove(atOffsets: offsets)
-                            }
-                            .onMove { source, destination in
-                                addedRecipes.move(fromOffsets: source, toOffset: destination)
-                            }
-                        }
-                        .listStyle(.plain)
+                        .disabled(selectedRecipes.isEmpty)
                     }
                 }
+                .sheet(isPresented: $showBottomSheet) {
+                    RecipeSelectionSheet(
+                        selectedRecipes: $selectedRecipes,
+                        isPresented: $showBottomSheet
+                    )
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+                }
+                .alert("No Recipes Selected", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("Please select at least one recipe")
+                }
             }
-            Spacer()
         }
-        .alert(isPresented: $showAlert, content: {
-            Alert(title: Text("You haven't add your recipes!"))
-        })
-        .sheet(isPresented: $isPresentSheet) {
-            BottomSheetView(isPresented: $isPresentSheet,addedRecipes: $addedRecipes)
-                .presentationDetents([.medium,.large])
-                .presentationDragIndicator(.visible)
+    }
+    
+    private var emptyStateView: some View {
+        VStack(spacing: 20) {
+            Text("Create a collection of your favorite recipes!")
+                .foregroundStyle(.secondary)
+                .bold()
+            
+            Button {
+                showBottomSheet = true
+            } label: {
+                Label("Add Recipes", systemImage: "plus.circle.fill")
+                    .font(.title3)
+            }
+            .buttonStyle(.bordered)
         }
-
+        .padding()
+    }
+    
+    private var recipeListView: some View {
+        List {
+            ForEach(selectedRecipes) { recipe in
+                Text(recipe.name)
+            }
+            .onDelete { indexSet in
+                selectedRecipes.remove(atOffsets: indexSet)
+            }
+            .onMove { from, to in
+                selectedRecipes.move(fromOffsets: from, toOffset: to)
+            }
+            
+            Button {
+                showBottomSheet = true
+            } label: {
+                Label("Add More", systemImage: "plus")
+            }
+        }
+        .toolbar {
+            EditButton()
+        }
+    }
+    
+    private func saveNewFavorite() {
+        guard !selectedRecipes.isEmpty else {
+            showAlert = true
+            return
+        }
+        
+        let name = favoriteName.isEmpty ? "New Favorite \(favorites.count + 1)" : favoriteName
+        let newFavorite = FavoriteItem(name: name, recipes: selectedRecipes)
+        context.insert(newFavorite)
+        dismiss()
     }
 }
 
-
-struct BottomSheetView:View{
-    @Query var recipesLibrary:[Recipe]
-    @State private var searchQuery = ""
-    @State private var selectedRecipes = Set<UUID>()
+struct RecipeSelectionSheet: View {
+    @Query private var recipes: [Recipe]
+    @Binding var selectedRecipes: [Recipe]
     @Binding var isPresented: Bool
-    @Binding var addedRecipes: [Recipe]
+    @State private var searchText = ""
+    @State private var selection = Set<UUID>()
     
+    var filteredRecipes: [Recipe] {
+        if searchText.isEmpty {
+            return recipes
+        }
+        return recipes.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
     
     var body: some View {
-        Spacer()
+        NavigationView {
+            VStack {
+                searchBar
+                
+                List(filteredRecipes, id: \.id, selection: $selection) { recipe in
+                    Text(recipe.name)
+                        .tag(recipe.id)
+                }
+                .listStyle(.plain)
+                
+                Text("\(selection.count) selected")
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom)
+            }
+            .navigationTitle("Select Recipes")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button("Add Selected") {
+                    for recipe in filteredRecipes where selection.contains(recipe.id) {
+                        if !selectedRecipes.contains(where: { $0.id == recipe.id }) {
+                            selectedRecipes.append(recipe)
+                        }
+                    }
+                    isPresented = false
+                }
+            }
+        }
+    }
+    
+    private var searchBar: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
-                .padding(.leading, 8)
-                    
-            TextField("Search you recipe in library", text: $searchQuery)
-                .padding(8)
+                .foregroundStyle(.secondary)
+            
+            TextField("Search recipes", text: $searchText)
         }
+        .padding(8)
         .background(Color(.systemGray6))
         .cornerRadius(10)
         .padding()
-        NavigationView {
-            VStack {
-                List(filteredRecipes, id: \.id, selection: $selectedRecipes) { recipe in
-                    Text(recipe.name)
-                }
-                .listStyle(.plain)
-                Text("\(selectedRecipes.count) selections")                
-            }
-            .navigationTitle("Library")
-            .toolbar {
-                Button("Add Selected Recipes") {
-                    for recipe in filteredRecipes where selectedRecipes.contains(recipe.id) {
-                        if !addedRecipes.contains(where: { $0.id == recipe.id }) {
-                            addedRecipes.append(recipe)
-                        }
-                    }
-                     isPresented = false
-                }
-            }
-        }
-        
-    }
-    
-    
-    var filteredRecipes:[Recipe]{
-        if searchQuery.isEmpty{
-            return recipesLibrary
-        }else{
-            return recipesLibrary.filter{ recipe in
-                recipe.name.localizedStandardContains(searchQuery)
-            }
-        }
     }
 }
+
 

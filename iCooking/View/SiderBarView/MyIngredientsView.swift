@@ -36,7 +36,7 @@ struct MyIngredientsView: View{
             ScrollView{
                 LazyVGrid(columns: columns, spacing: 16){
                     ForEach(filteredIngredients){ ingredient in
-                        IngredientViewComponent(Ingredient: ingredient)
+                        IngredientViewComponent(ingredient: ingredient)
                             .padding()
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
@@ -67,57 +67,51 @@ struct MyIngredientsView: View{
 
 
 struct IngredientViewComponent: View{
-    var Ingredient: Ingredient
-    var body: some View{
-            VStack {
-                HStack{
-                    if let image = Ingredient.image {
-                        Image(image)
-                            .resizable()
-                            .frame(width: 70, height: 70)
-                            .cornerRadius(8)
-                    } else {
-                        // Deal with no image
-                        Image(systemName: "photo") // Using system image
-                            .resizable()
-                            .frame(width: 70, height: 70)
-                            .cornerRadius(8)
-                    }
-                    Text(Ingredient.name)
-                        .font(.title)
-                        .padding(.leading, 20)
-                       
-                    Spacer()
+    var ingredient: Ingredient
+    var body: some View {
+        VStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(ingredient.name)
+                        .font(.title2)
+                        .bold()
                 }
-                .frame(minWidth: 0, maxWidth: 500)
+                Spacer()
+                if let image = ingredient.image {
+                    Image(image)
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .cornerRadius(8)
+                } else {
+                    // Deal with no image
+                    Image(systemName: "photo") // Using system image
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .cornerRadius(8)
+                }
+                
             }
-            .foregroundStyle(.primary)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .padding(-12)
-                    .foregroundStyle(Color(UIColor.systemGray5))
-            )
+            .padding()
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 2)
+        )
     }
 }
 
 struct AddButton: View{
     var body: some View{
-            VStack {
-                HStack{
-                    Spacer()
-                    Image(systemName: "plus")
-                        .resizable()
-                        .frame(width:50, height:50)
-                        .padding(10)
-                    Spacer()
-                }
-                .frame(minWidth: 0, maxWidth: 500)
-            }
-            .foregroundStyle(.primary)
+        Image(systemName: "plus")
+            .resizable()
+            .frame(width: 30, height: 30)
+            .foregroundColor(.white)
+            .padding(20)
             .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .padding(-12)
-                    .foregroundStyle(Color(UIColor.systemGray5))
+                Circle()
+                    .fill(Color.blue)
+                    .shadow(radius: 2)
             )
     }
 }

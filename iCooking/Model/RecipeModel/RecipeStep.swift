@@ -14,10 +14,11 @@ class RecipeStep: Identifiable {
     
     var ingredients: [Ingredient]
     var descrip: String
-    var skills: [String]
-    var tools: [String]
     
-    // 用于表示 StepTime 的属性
+    @Relationship(deleteRule: .nullify)
+    var skills: [Skill]
+    
+    var tools: [String]
     var durationValue: Double
     var durationUnit: UnitOfTime
 
@@ -25,7 +26,7 @@ class RecipeStep: Identifiable {
         id: UUID = UUID(),
         ingredients: [Ingredient],
         description: String,
-        skills: [String],
+        skills: [Skill],
         tools: [String],
         duration: StepTime
     ) {
@@ -38,7 +39,6 @@ class RecipeStep: Identifiable {
         self.durationUnit = duration.unit
     }
 
-    // 计算属性，用于返回 StepTime 结构体
     var duration: StepTime {
         get {
             StepTime(value: durationValue, unit: durationUnit)

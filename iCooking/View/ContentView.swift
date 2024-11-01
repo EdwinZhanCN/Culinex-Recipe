@@ -86,6 +86,7 @@ enum SideBarItem:String, CaseIterable{
     case recipesLibrary = "🧾Recipes Library"
     case ingredients = "🥕My Ingredients"
     case timer = "⏱️Timer"
+    case skills = "📚Skills"
     
     var localizedName: String {
         self.rawValue
@@ -103,6 +104,8 @@ func detailViewFactory(_ selectedItem: SideBarItem) -> some View{
         return AnyView(MyIngredientsView())
     case .timer:
         return AnyView(TimerView())
+    case .skills:
+        return AnyView(SkillsLibraryView())
     }
 }
 
