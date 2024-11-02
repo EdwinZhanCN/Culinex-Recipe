@@ -8,19 +8,24 @@
 import Foundation
 import SwiftData
 
+
+
+
 @Model
 class RecipeStep: Identifiable {
-    var id: UUID = UUID()
-    
-    var ingredients: [Ingredient]
+    @Attribute(.unique) var id: UUID
+
     var descrip: String
-    
-    @Relationship(deleteRule: .nullify)
-    var skills: [Skill]
-    
     var tools: [String]
+    
+    // duration
     var durationValue: Double
     var durationUnit: UnitOfTime
+    
+    @Relationship var skills: [Skill]
+    @Relationship var ingredients: [Ingredient]
+
+
 
     init(
         id: UUID = UUID(),

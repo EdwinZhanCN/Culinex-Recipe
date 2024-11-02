@@ -44,7 +44,6 @@ let sampleSteps: [RecipeStep] = [
 let sampleRecipes: [Recipe] = [
     Recipe(
         name: "Tomato Basil Pasta",
-        ingredients: sampleIngredients,
         steps: sampleSteps
     )
 ]

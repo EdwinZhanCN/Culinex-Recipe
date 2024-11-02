@@ -10,7 +10,15 @@ import SwiftData
 
 @MainActor
 let previewContainer: ModelContainer = {
-    let schema = Schema([FavoriteItem.self, Recipe.self, Ingredient.self, RecipeStep.self])
+    let schema = Schema(
+        [
+            FavoriteItem.self,
+            Recipe.self,
+            Ingredient.self,
+            RecipeStep.self,
+            Skill.self
+        ]
+    )
     let config = ModelConfiguration(
         "Magic Recipe",
         schema: schema,
@@ -22,15 +30,14 @@ let previewContainer: ModelContainer = {
         )
         
         // 插入样本数据
-        for recipe in sampleRecipes {
-            container.mainContext.insert(recipe)
+        for skill in sampleSkills{
+            container.mainContext.insert(skill)
         }
+        
         for ingredient in sampleIngredients {
             container.mainContext.insert(ingredient)
         }
-        for favoriteItem in sampleFavoriteItems {
-            container.mainContext.insert(favoriteItem)
-        }
+        
         
         return container
     } catch {

@@ -64,7 +64,7 @@ struct SkillViewComponent: View {
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
-                Image(systemName: "scissors")
+                Image(systemName: skill.icon)
                     .imageScale(.large)
                     .foregroundStyle(.blue)
             }

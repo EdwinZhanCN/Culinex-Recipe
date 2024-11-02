@@ -35,7 +35,15 @@ struct ContentView: View {
                 ForEach(favoriteItems){ favorite in
                     DisclosureGroup(favorite.name) {
                         ForEach(favorite.recipes, id: \.id) { recipe in
-                            Text(recipe.name)
+                            NavigationLink{
+                                RecipeDetailView(
+                                    recipe: recipe,
+                                    isNewRecipe: false
+                                )
+                            } label:{
+                                Text(recipe.name)
+                            }
+                            
                         }
                     }
                 }
@@ -85,7 +93,6 @@ enum SideBarItem:String, CaseIterable{
     case overview = "🏠Overview"
     case recipesLibrary = "🧾Recipes Library"
     case ingredients = "🥕My Ingredients"
-    case timer = "⏱️Timer"
     case skills = "📚Skills"
     
     var localizedName: String {
@@ -102,8 +109,6 @@ func detailViewFactory(_ selectedItem: SideBarItem) -> some View{
         return AnyView(RecipesLibraryView())
     case .ingredients:
         return AnyView(MyIngredientsView())
-    case .timer:
-        return AnyView(TimerView())
     case .skills:
         return AnyView(SkillsLibraryView())
     }

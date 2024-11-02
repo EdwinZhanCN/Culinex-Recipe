@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 
 /// The IngredientsView takes the array of ingredients from viewmodel and pass it to the smaller components
@@ -116,33 +117,25 @@ struct AddButton: View{
     }
 }
 
+
+
 struct AddIngredientView: View{
     @Binding var isPresented: Bool
     
     //data
     @Query var ingredients:[Ingredient]
     @Environment(\.modelContext) var context:ModelContext
-    @State var isAlertPresented:Bool = false
-    @State var ingredientName:String = ""
+    @State private var isAlertPresented:Bool = false
+    @State private var ingredientName:String = ""
+    @State private var selectedImageItem: PhotosPickerItem?
+    @State private var selectedImage: UIImage?
+    
+    
     var body: some View{
         VStack{
             Text("Add An Ingredients")
                 .font(.title)
-            
-            ZStack{
-                RoundedRectangle(
-                    cornerRadius: 16)
-                    .stroke(style: StrokeStyle(lineWidth: 2, dash: [8, 4]))
-                    .frame(width: 300, height: 300)
-                    .foregroundColor(Color(UIColor.systemGray3)
-                )
-                Text("Choose An Image (Optional)")
-                    .padding(10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundStyle(Color(UIColor.systemGray5))
-                    )
-            }
+
             HStack{
                 Spacer()
                 HStack{
@@ -155,7 +148,41 @@ struct AddIngredientView: View{
                         .foregroundStyle(Color(UIColor.systemGray6))
                 )
             }
-            .padding(50)
+            .padding()
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(style: StrokeStyle(lineWidth: 2, dash: [8, 4]))
+                    .frame(width: 300, height: 300)
+                    .foregroundColor(Color(UIColor.systemGray3))
+
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height:300)
+                } else {
+                    PhotosPicker(selection: $selectedImageItem, matching: .images) {
+                        Label("Choose from Library", systemImage: "photo.on.rectangle")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .onChange(of: selectedImageItem) { oldValue, newValue in
+                        if newValue != oldValue {
+                            // Handle logic using old and new values
+                            Task {
+                                if let data = try? await newValue?.loadTransferable(type: Data.self),
+                                   let uiImage = UIImage(data: data) {
+                                    selectedImage = uiImage
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .padding(.bottom, 20)
             HStack{
                 Button {
                     isPresented.toggle()

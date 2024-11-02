@@ -15,7 +15,8 @@ struct iCookingApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(container)
+//        .modelContainer(container)
+        .modelContainer(previewContainer)
     }
     init(){
         let schema = Schema([FavoriteItem.self, Recipe.self ,Ingredient.self])
