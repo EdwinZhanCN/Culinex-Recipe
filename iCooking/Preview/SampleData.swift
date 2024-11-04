@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import SwiftData
+import Foundation
 
 // Sample Data for Ingredient
 let sampleIngredients: [Ingredient] = [
@@ -16,43 +17,27 @@ let sampleIngredients: [Ingredient] = [
     Ingredient(name: "Olive Oil", image: "olive_oil")
 ]
 
+let arObjectData = loadRealityFile(named: "hab_en")
+
 // Sample Data for Skill
 let sampleSkills: [Skill] = [
-    Skill(name: "Chopping", category: "Kitchen Skills"),
+    Skill(name: "Chopping", category: "Kitchen Skills", ARObject: arObjectData),
     Skill(name: "Crushing", category: "Kitchen Skills")
 ]
 
-// Sample Data for RecipeStep
-let sampleSteps: [RecipeStep] = [
-    RecipeStep(
-        ingredients: [sampleIngredients[0], sampleIngredients[1]],
-        description: "Chop tomatoes and onions",
-        skills: [sampleSkills[0]],
-        tools: ["Knife", "Cutting Board"],
-        duration: StepTime(value: 5, unit: .min)
-    ),
-    RecipeStep(
-        ingredients: [sampleIngredients[2], sampleIngredients[3]],
-        description: "Crush garlic and basil",
-        skills: [sampleSkills[1]],
-        tools: ["Mortar and Pestle"],
-        duration: StepTime(value: 3, unit: .min)
-    )
-]
+func loadRealityFile(named fileName: String) -> Data? {
+    guard let url = Bundle.main.url(forResource: fileName, withExtension: "reality") else {
+        print("Failed to find .reality file named \(fileName)")
+        return nil
+    }
+    
+    do {
+        let data = try Data(contentsOf: url)
+        return data
+    } catch {
+        print("Error loading .reality file: \(error)")
+        return nil
+    }
+}
 
-// Sample Data for Recipe
-let sampleRecipes: [Recipe] = [
-    Recipe(
-        name: "Tomato Basil Pasta",
-        steps: sampleSteps
-    )
-]
-
-// Sample Data for FavoriteItem
-let sampleFavoriteItems: [FavoriteItem] = [
-    FavoriteItem(
-        name: "My Favorite Recipes",
-        recipes: sampleRecipes
-    )
-]
 

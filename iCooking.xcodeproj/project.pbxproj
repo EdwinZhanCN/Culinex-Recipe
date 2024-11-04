@@ -33,6 +33,8 @@
 		31E599832CD1E40B0009CB53 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E599822CD1E3EC0009CB53 /* SampleData.swift */; };
 		31E5998A2CD1E9450009CB53 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E599892CD1E9360009CB53 /* PreviewContainer.swift */; };
 		31E814A52CD6E6AD0092C015 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E814A32CD6E6A60092C015 /* Photos.framework */; };
+		31E814AA2CD868A30092C015 /* SkillDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E814A92CD8687B0092C015 /* SkillDetailView.swift */; };
+		31E814AC2CD86D830092C015 /* hab_en.reality in Resources */ = {isa = PBXBuildFile; fileRef = 31E814AB2CD86D830092C015 /* hab_en.reality */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		31E599892CD1E9360009CB53 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		31E814A32CD6E6A60092C015 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		31E814A82CD6E6C00092C015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		31E814A92CD8687B0092C015 /* SkillDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailView.swift; sourceTree = "<group>"; };
+		31E814AB2CD86D830092C015 /* hab_en.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = hab_en.reality; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 				31C97E852B755E8400A69DF7 /* SiderBarView */,
 				31C97E622B755C2B00A69DF7 /* ContentView.swift */,
 				31C97E742B755E2D00A69DF7 /* AddFavoriteView.swift */,
+				31E814A92CD8687B0092C015 /* SkillDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,11 +152,11 @@
 		31C97E842B755E4700A69DF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3130EEF22CD5583B00B96217 /* Skill.swift */,
 				31E4D1462B7AAC8A00BA7966 /* RecipeModel */,
 				31C97E882B755EE200A69DF7 /* Favorite.swift */,
 				31C97E872B755EE200A69DF7 /* Ingredient.swift */,
 				31C97E862B755EE200A69DF7 /* Recipe.swift */,
+				3130EEF22CD5583B00B96217 /* Skill.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				31E599822CD1E3EC0009CB53 /* SampleData.swift */,
+				31E814AB2CD86D830092C015 /* hab_en.reality */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31E814AC2CD86D830092C015 /* hab_en.reality in Resources */,
 				31C97E6A2B755C2C00A69DF7 /* Preview Assets.xcassets in Resources */,
 				31C97E672B755C2C00A69DF7 /* Assets.xcassets in Resources */,
 			);
@@ -283,6 +290,7 @@
 				31C97E7A2B755E2D00A69DF7 /* MyIngredientsView.swift in Sources */,
 				31CEC3582CD5A1FC0000FC58 /* stepBlockView.swift in Sources */,
 				31C97E7C2B755E2D00A69DF7 /* RecipeDetailView.swift in Sources */,
+				31E814AA2CD868A30092C015 /* SkillDetailView.swift in Sources */,
 				31C97E7D2B755E2D00A69DF7 /* AddFavoriteView.swift in Sources */,
 				31CEC35A2CD5A20B0000FC58 /* DescriptionView.swift in Sources */,
 				31C97E812B755E2D00A69DF7 /* OverviewView.swift in Sources */,

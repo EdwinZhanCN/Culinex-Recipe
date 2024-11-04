@@ -37,8 +37,8 @@ struct RecipeDetailView: View {
         self.PassedInRecipe = recipe
         
         // Extract
-        self.PassedInName = recipe.name
-        self.PassedInSteps = recipe.steps
+        self._PassedInName = State(initialValue: recipe.name)
+        self._PassedInSteps = State(initialValue: recipe.steps)
         
         // Condition
         self.isNewRecipe = isNewRecipe

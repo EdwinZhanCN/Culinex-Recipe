@@ -11,8 +11,14 @@ struct SkillsLibraryView: View {
     }
     
     @Query(sort:\Skill.name) var skills: [Skill]
+    @Environment(\.modelContext) private var context
+    
     @State private var searchText: String = ""
     @State private var showAddSkill: Bool = false
+    
+    @State private var showARView = false
+    @State private var selectedSkillForARView: Skill?
+
     
     var filteredSkills: [Skill] {
         if searchText.isEmpty {
@@ -27,10 +33,27 @@ struct SkillsLibraryView: View {
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(filteredSkills) { skill in
                     SkillViewComponent(skill: skill)
-                        .padding()
+                        .contentShape(Rectangle())
+                        .contextMenu {
+                            if skill.ARObject != nil {
+                                Button {
+                                    // Set the selected skill and present the sheet
+                                    selectedSkillForARView = skill
+                                    showARView = true
+                                } label: {
+                                    Label("AR View", systemImage: "cube.transparent")
+                                }
+                            }
+                            Button(role: .destructive){
+                                deleteSkill(skill)
+                            } label:{
+                                Label("Delete", systemImage: "trash")
+                            }
+                            
+                        }
                 }
                 Button(action: {
                     showAddSkill.toggle()
@@ -46,10 +69,23 @@ struct SkillsLibraryView: View {
         .sheet(isPresented: $showAddSkill) {
             AddSkillView(isPresented: $showAddSkill)
         }
+        .sheet(item: $selectedSkillForARView) { skill in
+            SkillARView(skill: skill)
+        }
+    }
+    
+    private func deleteSkill(_ skill: Skill) {
+        context.delete(skill)
+        do {
+            try context.save()
+        } catch {
+            print("Error deleting ingredient: \(error)")
+        }
     }
 }
 
 struct SkillViewComponent: View {
+    @Environment(\.colorScheme) var colorScheme
     var skill: Skill
     
     var body: some View {
@@ -72,7 +108,11 @@ struct SkillViewComponent: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color(.systemBackground))
+                .fill(
+                    Color(
+                        colorScheme == .dark ? UIColor.systemGray5 : UIColor.systemGray6
+                    )
+                )
                 .shadow(radius: 2)
         )
     }
