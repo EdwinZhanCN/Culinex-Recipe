@@ -19,7 +19,9 @@ struct iCookingApp: App {
         .modelContainer(previewContainer)
     }
     init(){
-        let schema = Schema([FavoriteItem.self, Recipe.self ,Ingredient.self])
+        let schema = Schema(
+            [FavoriteItem.self, Recipe.self ,Ingredient.self,Skill.self]
+        )
         let config = ModelConfiguration("Magic Recipe", schema: schema)
         do{
             container = try ModelContainer(for: schema, configurations: config)

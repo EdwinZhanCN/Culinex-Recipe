@@ -6,15 +6,20 @@ class Skill: Identifiable {
     @Attribute(.unique) var id: UUID
     var name: String
     var category: String
-    var ARObject: Data?
+    var ARFileName: String?
     
     @Relationship(inverse: \RecipeStep.skills) var recipeSteps: [RecipeStep] = []
     
-    init(id: UUID = UUID(), name: String, category: String = "General", ARObject: Data? = nil) {
+    init(
+        id: UUID = UUID(),
+        name: String,
+        category: String = "General",
+        ARFileName: String? = nil
+    ) {
         self.id = id
         self.name = name
         self.category = category
-        self.ARObject = ARObject
+        self.ARFileName = ARFileName
     }
     
     // Different icon for each category

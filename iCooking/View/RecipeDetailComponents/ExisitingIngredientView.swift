@@ -31,12 +31,15 @@ struct ExisitingIngredientView: View {
                     .padding(.horizontal)
                 ForEach(filteredIngredients) { ingredient in
                     HStack {
-                        if let image = ingredient.image {
-                            Image(image)
-                                .resizable()
-                                .frame(width: 40, height: 40)
+                        if let imageData = ingredient.image {
+                            if let uiImage = UIImage(data: imageData){
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }
                         } else {
-                            Image(systemName: "photo")
+                            // Deal with no image
+                            Image(systemName: "photo") // Using system image
                                 .resizable()
                                 .frame(width: 40, height: 40)
                         }

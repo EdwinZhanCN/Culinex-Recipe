@@ -11,6 +11,7 @@ import SwiftData
 
 struct stepBlockView: View {
     var recipeStep: RecipeStep
+    @Binding var isInFullScreen: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -85,5 +86,8 @@ struct stepBlockView: View {
             }
         }
         .frame(maxWidth: .infinity)
+        .fullScreenCover(isPresented: $isInFullScreen){
+            StepFullScreenView()
+        }
     }
 }

@@ -39,7 +39,7 @@ struct MyIngredientsView: View{
             LazyVGrid(columns: columns, spacing: 10){
                 ForEach(filteredIngredients){ ingredient in
                     IngredientViewComponent(ingredient: ingredient)
-                        .contentShape(Rectangle())
+                        .contentShape(RoundedRectangle(cornerRadius: 8))
                         .contextMenu {
                             Button(role: .destructive){
                                 deleteIngredient(ingredient)
@@ -89,11 +89,13 @@ struct IngredientViewComponent: View{
                         .bold()
                 }
                 Spacer()
-                if let image = ingredient.image {
-                    Image(image)
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .cornerRadius(8)
+                if let imageData = ingredient.image {
+                    if let uiImage = UIImage(data: imageData){
+                        Image(uiImage: uiImage) // Using system image
+                            .resizable()
+                            .frame(width: 70, height: 70)
+                            .cornerRadius(8)
+                    }
                 } else {
                     // Deal with no image
                     Image(systemName: "photo") // Using system image

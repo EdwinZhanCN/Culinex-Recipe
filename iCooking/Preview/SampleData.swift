@@ -10,18 +10,20 @@ import Foundation
 
 // Sample Data for Ingredient
 let sampleIngredients: [Ingredient] = [
-    Ingredient(name: "Tomato", image: "tomato"),
-    Ingredient(name: "Onion", image: "onion"),
-    Ingredient(name: "Garlic", image: "garlic"),
-    Ingredient(name: "Basil", image: "basil"),
-    Ingredient(name: "Olive Oil", image: "olive_oil")
+    Ingredient(
+        name: "Tomato",
+        image: UIImage(named:"tomato")!.jpegData(compressionQuality: 1.0)
+    ),
+    Ingredient(name: "Onion", image: UIImage(named:"onion")!.jpegData(compressionQuality: 1.0)),
+    Ingredient(name: "Garlic", image: UIImage(named:"garlic")!.jpegData(compressionQuality: 1.0)),
+    Ingredient(name: "Basil", image: UIImage(named:"basil")!.jpegData(compressionQuality: 1.0)),
+    Ingredient(name: "Olive Oil", image: UIImage(named:"olive_oil")!.jpegData(compressionQuality: 1.0))
 ]
 
-let arObjectData = loadRealityFile(named: "hab_en")
 
 // Sample Data for Skill
 let sampleSkills: [Skill] = [
-    Skill(name: "Chopping", category: "Kitchen Skills", ARObject: arObjectData),
+    Skill(name: "Chopping", category: "Kitchen Skills", ARFileName: "cup_saucer_set"),
     Skill(name: "Crushing", category: "Kitchen Skills")
 ]
 

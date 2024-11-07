@@ -28,6 +28,9 @@ struct RecipeDetailView: View {
     @State private var NewStepDurationUnit: UnitOfTime = .min
     @State private var NewStepTools:[String] = []
     
+    // Full Screen
+    @State private var isInFullScreen: Bool = false
+    
     
     // Data from SwiftData
     @Query var contextIngredients: [Ingredient]
@@ -59,18 +62,16 @@ struct RecipeDetailView: View {
                         if isNewRecipe{
                             Text("Welcome to your new recipe!")
                                 .padding()
-                                .foregroundStyle(.white)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .foregroundStyle(.gray)
-                                )
+                                .foregroundStyle(.blue)
                                 .padding(.horizontal)
                         }
                         
                         // Iterate the steps of passed in recipe
                         ForEach(PassedInSteps) { step in
-                            
-                            stepBlockView(recipeStep: step)
+                            stepBlockView(
+                                recipeStep: step,
+                                isInFullScreen: $isInFullScreen
+                            )
                                 .padding()
                                 .background(
                                     RoundedRectangle(cornerRadius: 8)
@@ -209,6 +210,18 @@ struct RecipeDetailView: View {
                         Image(systemName: "square.and.pencil")
                     }
                     .buttonStyle(.borderless)
+                }
+                
+                //Start the recipe
+                ToolbarItem(placement: .topBarLeading) {
+                    Button{
+                        isInFullScreen = true
+                    }label: {
+                        Image(systemName: "arrowtriangle.forward.circle.fill")
+                            .padding()
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.green)
+                    }
                 }
             }
         }
