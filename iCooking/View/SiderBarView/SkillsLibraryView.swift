@@ -10,16 +10,15 @@ struct SkillsLibraryView: View {
         }
     }
     
-    @Query(sort:\Skill.name) var skills: [Skill]
+    @Query(sort: \Skill.name) var skills: [Skill]
     @Environment(\.modelContext) private var context
     
     @State private var searchText: String = ""
     @State private var showAddSkill: Bool = false
     
-    @State private var showARView = false
-    @State private var selectedSkillForARView: Skill?
+    @State private var selectedModelFileName: String = ""
+    @State private var toggleARQuickLookView: Bool = false
 
-    
     var filteredSkills: [Skill] {
         if searchText.isEmpty {
             return skills
@@ -36,23 +35,22 @@ struct SkillsLibraryView: View {
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(filteredSkills) { skill in
                     SkillViewComponent(skill: skill)
-                        .contentShape(Rectangle())
+                        .contentShape(RoundedRectangle(cornerRadius: 8))
                         .contextMenu {
-                            if skill.ARObject != nil {
-                                Button {
-                                    // Set the selected skill and present the sheet
-                                    selectedSkillForARView = skill
-                                    showARView = true
-                                } label: {
-                                    Label("AR View", systemImage: "cube.transparent")
+                            
+                            if skill.ARFileName != nil {
+                                Button{
+                                    toggleARQuickLookView = true
+                                } label:{
+                                    Label("AR View", systemImage: "arkit")
                                 }
                             }
-                            Button(role: .destructive){
+                            
+                            Button(role: .destructive) {
                                 deleteSkill(skill)
-                            } label:{
+                            } label: {
                                 Label("Delete", systemImage: "trash")
                             }
-                            
                         }
                 }
                 Button(action: {
@@ -69,8 +67,25 @@ struct SkillsLibraryView: View {
         .sheet(isPresented: $showAddSkill) {
             AddSkillView(isPresented: $showAddSkill)
         }
-        .sheet(item: $selectedSkillForARView) { skill in
-            SkillARView(skill: skill)
+        .fullScreenCover(isPresented: $toggleARQuickLookView){
+            ZStack{
+                QLModel(name: selectedModelFileName)
+                    .edgesIgnoringSafeArea(.all)
+                VStack{
+                    Button {
+                        toggleARQuickLookView=false
+                    } label: {
+                        HStack{
+                            Label("Back", systemImage: "chevron.backward.circle")
+                                .font(.largeTitle)
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                    Spacer()
+                }
+            }
         }
     }
     
@@ -178,7 +193,3 @@ struct AddSkillView: View {
     }
 }
 
-#Preview {
-    SkillsLibraryView()
-        .modelContainer(previewContainer)
-} 
