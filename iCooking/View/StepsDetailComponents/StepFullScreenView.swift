@@ -5,102 +5,266 @@
 //  Created by 詹子昊 on 11/6/24.
 //
 
+// File: StepFullScreenView.swift
 import SwiftUI
 import SwiftData
 
 struct StepFullScreenView: View {
-    @State private var currentStep: Int? = 1
-    private var totalSteps: Int = 4
-    private var sampleTime: StepTime = StepTime(value: 5, unit: .sec)
+    @Environment(\.dismiss) private var dismiss
+    @Binding var steps: [RecipeStep]  // Passed from RecipeDetailView
+    @State private var currentStepIndex: Int = 0
     
-    @State private var countdownTime: Double = 0
-    @State private var timerActive = false
-    @State private var showNotification = false
-    @State private var notificationMessage = ""
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 20) {
+                // Progress indicator
+                ProgressView(value: Double(currentStepIndex + 1), total: Double(steps.count))
+                    .tint(.blue)
+                    .padding(.horizontal)
+                
+                // Step content
+                VStack(alignment: .leading, spacing: 16) {
+                    StepHeaderView(currentStep: currentStepIndex + 1, totalSteps: steps.count)
+                    
+                    TimerView(time: steps[currentStepIndex].duration)
+                        .id(currentStepIndex)
+                    
+                    // Step details
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text(steps[currentStepIndex].descrip)
+                                .font(.body)
+                            
+                            if !steps[currentStepIndex].ingredients.isEmpty {
+                                IngredientsListView(ingredients: steps[currentStepIndex].ingredients)
+                            }
+                            
+                            if !steps[currentStepIndex].tools.isEmpty {
+                                ToolsListView(tools: steps[currentStepIndex].tools)
+                            }
+                        }
+                        .padding()
+                        .background(Color(.systemGray6), in: RoundedRectangle(cornerRadius: 12))
+                    }
+                }
+                .padding()
+                
+                // Navigation buttons
+                StepNavigationButtons(
+                    currentStep: $currentStepIndex,
+                    totalSteps: steps.count,
+                    dismiss: dismiss
+                )
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Exit") { dismiss() }
+                }
+            }
+        }
+    }
+}
+
+struct StepHeaderView: View {
+    let currentStep: Int
+    let totalSteps: Int
+    
+    var body: some View {
+        HStack {
+            Text("Step \(currentStep) of \(totalSteps)")
+                .font(.headline)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(.blue.gradient)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
+            Spacer()
+        }
+    }
+}
+
+struct TimerView: View {
+    let time: StepTime
+    @State private var isTimerRunning = false
+    @State private var remainingSeconds: Int
+    @State private var timerCompleted = false
+    
+    // 计算总秒数的独立方法
+    private func computeTotalSeconds() -> Int {
+        switch time.unit {
+        case .hr: Int(time.value * 3600)
+        case .min: Int(time.value * 60)
+        case .sec: Int(time.value)
+        }
+    }
+    
+    // 格式化显示时间（00:00:00）
+    private var formattedTime: String {
+        let hours = remainingSeconds / 3600
+        let minutes = (remainingSeconds % 3600) / 60
+        let seconds = remainingSeconds % 60
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    init(time: StepTime) {
+        self.time = time
+        _remainingSeconds = State(initialValue: time.computeTotalSeconds())
+    }
     
     var body: some View {
         VStack {
             HStack {
-                Text("Step \(currentStep ?? 1)/\(totalSteps)")
-                    .padding()
-                    .background(in: RoundedRectangle(cornerRadius: 6))
-                    .backgroundStyle(.blue.gradient)
-                
-                if showNotification {
-                    HStack {
-                        Text(notificationMessage)
-                            .padding()
-                        Spacer()
-                        Button(action: {
-                            closeNotification()
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    .padding()
-                    .background(Color.yellow.opacity(0.9))
-                    .cornerRadius(10)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    .padding()
-                } else{
-                    Spacer()
+                // 重置按钮
+                Button {
+                    isTimerRunning = false
+                    timerCompleted = false
+                    remainingSeconds = computeTotalSeconds()  // 修复1：使用正确计算方法
+                } label: {
+                    Image(systemName: "arrow.counterclockwise.circle")
+                        .resizable()
+                        .frame(width: 44, height: 44)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.blue, .gray)
                 }
                 
-                HStack(spacing: 20) {
-                    Button {
-                        startTimer()
-                    } label: {
-                        Image(systemName: "arrowtriangle.right.circle.fill")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(.green, .indigo)
-                    }
-                    
-                    Text("\(String(format: "%.1f", countdownTime)) \(sampleTime.unit.toString(value: sampleTime.value))")
-                        .padding()
-                        .foregroundStyle(.orange)
-                        .background(in: RoundedRectangle(cornerRadius: 6))
-                        .backgroundStyle(.tertiary)
+                // 播放/暂停按钮
+                Button {
+                    isTimerRunning.toggle()
+                } label: {
+                    Image(systemName: isTimerRunning ? "pause.circle.fill" : "play.circle.fill")
+                        .resizable()
+                        .frame(width: 44, height: 44)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(isTimerRunning ? .red : .green, .gray)
                 }
+                
+                // 时间显示
+                Text(formattedTime)
+                    .font(.title2.monospacedDigit())
+                    .padding(.horizontal)
+                    .frame(minWidth: 100)
+                    .foregroundStyle(timerCompleted ? .red : .primary)
+                    .contentTransition(.numericText())
             }
             
-            RoundedRectangle(cornerRadius: 8)
-            
-            Spacer()
-        }
-        .padding(30)
-    }
-    
-    func startTimer() {
-        countdownTime = sampleTime.value
-        timerActive = true
-        showNotification = false // Hide any previous notification
-        
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if countdownTime > 0 {
-                countdownTime -= 1
-            } else {
-                timer.invalidate()
-                timerActive = false
-                showEndNotification()
+            // 状态提示
+            if isTimerRunning || timerCompleted {
+                Text(timerCompleted ? "Time's up!" : "Timer running...")
+                    .font(.caption)
+                    .foregroundStyle(timerCompleted ? .red : .secondary)
             }
         }
-    }
-    
-    func showEndNotification() {
-        notificationMessage = "Timer has ended!"
-        withAnimation(.easeOut(duration: 0.4)) { // Smooth entrance
-            showNotification = true
+        .onChange(of: time) { oldTime, newTime in
+            isTimerRunning = false
+            timerCompleted = false
+            remainingSeconds = newTime.computeTotalSeconds()
         }
-    }
-    
-    func closeNotification() {
-        withAnimation(.easeInOut(duration: 0.3)) { // Smooth exit
-            showNotification = false
+        .onReceive(Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()) { _ in
+            guard isTimerRunning, remainingSeconds > 0 else { return }
+            
+            remainingSeconds -= 1
+            
+            if remainingSeconds <= 0 {
+                timerCompleted = true
+                isTimerRunning = false
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            }
+        }
+        .onDisappear {
+            isTimerRunning = false
         }
     }
 }
+
+// 扩展 StepTime 添加计算方法
+extension StepTime {
+    func computeTotalSeconds() -> Int {
+        switch unit {
+        case .hr: Int(value * 3600)
+        case .min: Int(value * 60)
+        case .sec: Int(value)
+        }
+    }
+}
+
+struct StepNavigationButtons: View {
+    @Binding var currentStep: Int
+    let totalSteps: Int
+    let dismiss: DismissAction
     
+    var body: some View {
+        HStack {
+            Button {
+                withAnimation { currentStep -= 1 }
+            } label: {
+                Label("Previous", systemImage: "chevron.left")
+                    .labelStyle(.titleAndIcon)
+            }
+            .disabled(currentStep == 0)
+            
+            Spacer()
+            
+            Button {
+                if currentStep == totalSteps - 1 {
+                    dismiss()
+                } else {
+                    withAnimation { currentStep += 1 }
+                }
+            } label: {
+                Label(currentStep == totalSteps - 1 ? "Finish" : "Next",
+                      systemImage: currentStep == totalSteps - 1 ? "checkmark" : "chevron.right")
+                    .labelStyle(.titleAndIcon)
+            }
+        }
+        .padding()
+        .buttonStyle(.bordered)
+    }
+}
+
+struct IngredientsListView: View {
+    let ingredients: [Ingredient]
     
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Ingredients")
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            
+            ForEach(ingredients) { ingredient in
+                HStack(spacing: 12) {
+                    Image(systemName: "circle.fill")
+                        .font(.system(size: 6))
+                        .foregroundStyle(.secondary)
+                    
+                    Text(ingredient.name)
+                        .font(.subheadline)
+                }
+            }
+        }
+    }
+}
+
+struct ToolsListView: View {
+    let tools: [String]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Tools")
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            
+            ForEach(tools, id: \.self) { tool in
+                HStack(spacing: 12) {
+                    Image(systemName: "wrench.fill")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                    
+                    Text(tool)
+                        .font(.subheadline)
+                }
+            }
+        }
+    }
+}

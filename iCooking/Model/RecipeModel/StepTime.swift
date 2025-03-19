@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct StepTime {
+struct StepTime: Equatable {
     var value: Double
     var unit: UnitOfTime
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.value == rhs.value && lhs.unit == rhs.unit
+    }
 }
 
-enum UnitOfTime: String, Codable {
+enum UnitOfTime: String, Codable, Equatable {
     case hr
     case min
     case sec

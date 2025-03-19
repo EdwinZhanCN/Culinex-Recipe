@@ -15,6 +15,7 @@ struct stepBlockEditingView:View{
     @Binding var ingredients:[Ingredient]
     @Binding var durationValue:Double
     @Binding var durationUnit:UnitOfTime
+    
     var body: some View{
         VStack(alignment:.leading){
             //display the discription

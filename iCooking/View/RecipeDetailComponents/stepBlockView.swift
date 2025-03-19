@@ -11,6 +11,7 @@ import SwiftData
 
 struct stepBlockView: View {
     var recipeStep: RecipeStep
+    //TODO: remove the binding for the full screen view
     @Binding var isInFullScreen: Bool
     
     var body: some View {
@@ -86,8 +87,5 @@ struct stepBlockView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .fullScreenCover(isPresented: $isInFullScreen){
-            StepFullScreenView()
-        }
     }
 }

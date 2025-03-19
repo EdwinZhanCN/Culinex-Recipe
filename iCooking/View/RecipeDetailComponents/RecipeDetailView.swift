@@ -158,6 +158,10 @@ struct RecipeDetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .fullScreenCover(isPresented: $isInFullScreen){
+            StepFullScreenView(steps: $PassedInSteps)
+                .interactiveDismissDisabled()
+        }
         .toolbar {
             if isEditingName || isNewRecipe {
                 ToolbarItem(placement: .topBarTrailing) {
