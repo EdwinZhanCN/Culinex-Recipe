@@ -1,6 +1,8 @@
 import SwiftUI
 import SwiftData
 
+/// RecipesLibraryView.swift
+/// This is a part of SplitNavigationView, which displays a grid of recipes.
 struct RecipesLibraryView: View{
     // Get all recipes from the stored data
     @Query(sort: \Recipe.name)var recipesLibrary: [Recipe]
@@ -98,8 +100,8 @@ extension Color {
     }
 }
 
-#Preview{
-    RecipesLibraryView()
-        .modelContainer(previewContainer)
-}
+//#Preview{
+//    RecipesLibraryView()
+//        .modelContainer(previewContainer)
+//}
 

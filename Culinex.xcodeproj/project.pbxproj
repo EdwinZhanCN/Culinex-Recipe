@@ -12,6 +12,7 @@
 		3130EEF72CD5589700B96217 /* SkillsLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3130EEF62CD5589700B96217 /* SkillsLibraryView.swift */; };
 		314197072CD980DE00C5168A /* SkillARQuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314197062CD980D500C5168A /* SkillARQuickLook.swift */; };
 		314197092CD982EA00C5168A /* cup_saucer_set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 314197082CD982EA00C5168A /* cup_saucer_set.usdz */; };
+		3199DCB82E00A90B0000CDF1 /* LucideIcons in Frameworks */ = {isa = PBXBuildFile; productRef = 3199DCB72E00A90B0000CDF1 /* LucideIcons */; };
 		31A2E8A02CD2C63D002B54E6 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2E89F2CD2C63B002B54E6 /* Test.swift */; };
 		31C97E612B755C2B00A69DF7 /* Culinex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E602B755C2B00A69DF7 /* Culinex.swift */; };
 		31C97E632B755C2B00A69DF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E622B755C2B00A69DF7 /* ContentView.swift */; };
@@ -78,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31E814A52CD6E6AD0092C015 /* Photos.framework in Frameworks */,
+				3199DCB82E00A90B0000CDF1 /* LucideIcons in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +263,9 @@
 				Base,
 			);
 			mainGroup = 31C97E542B755C2B00A69DF7;
+			packageReferences = (
+				3199DCB62E00A90B0000CDF1 /* XCRemoteSwiftPackageReference "lucide-icons-swift" */,
+			);
 			productRefGroup = 31C97E5E2B755C2B00A69DF7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -445,11 +450,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"iCooking/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Culinex/Preview Content\"";
 				DEVELOPMENT_TEAM = 4AA9M7PY43;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iCooking/Info.plist;
+				INFOPLIST_FILE = Culinex/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Culinex;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to display augmented reality content.";
@@ -481,11 +486,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"iCooking/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Culinex/Preview Content\"";
 				DEVELOPMENT_TEAM = 4AA9M7PY43;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iCooking/Info.plist;
+				INFOPLIST_FILE = Culinex/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Culinex;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to display augmented reality content.";
@@ -532,6 +537,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3199DCB62E00A90B0000CDF1 /* XCRemoteSwiftPackageReference "lucide-icons-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JakubMazur/lucide-icons-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.515.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3199DCB72E00A90B0000CDF1 /* LucideIcons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3199DCB62E00A90B0000CDF1 /* XCRemoteSwiftPackageReference "lucide-icons-swift" */;
+			productName = LucideIcons;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 31C97E552B755C2B00A69DF7 /* Project object */;
 }

@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import LucideIcons
 
 struct ContentView: View {
     //Data
@@ -19,7 +20,28 @@ struct ContentView: View {
             List(selection:$selectedItem){
                 //The SiderBaritems
                 ForEach(SideBarItem.allCases, id: \.self){item in
-                    NavigationLink(item.localizedName,value: item)    
+                    NavigationLink(value: item) {
+                        HStack {
+                            #if canImport(UIKit)
+                            if let uiImage = UIImage(lucideId: item.iconName) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.primary)
+                            }
+                            #elseif canImport(AppKit)
+                            if let nsImage = NSImage.image(lucideId: item.iconName) {
+                                Image(nsImage: nsImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.primary)
+                            }
+                            #endif
+                            Text(item.displayName)
+                        }
+                    }
                 }
                 
                 //The heading of Favorite part
@@ -56,7 +78,25 @@ struct ContentView: View {
                     createFavoriteExpanded = true
                 }, label: {
                     HStack{
-                        Image(systemName: "plus.circle")
+                        #if canImport(UIKit)
+                        if let uiImage = UIImage(lucideId: "plus-circle") {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                        } else {
+                            Image(systemName: "plus.circle")
+                        }
+                        #elseif canImport(AppKit)
+                        if let nsImage = NSImage.image(lucideId: "plus-circle") {
+                            Image(nsImage: nsImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                        } else {
+                            Image(systemName: "plus.circle")
+                        }
+                        #endif
                         Text("Add your favorite recipes")
                     }
                 })
@@ -89,14 +129,36 @@ struct ContentView: View {
 }
 
 //The enum of SiderBar items
-enum SideBarItem:String, CaseIterable{
-    case overview = "🏠Overview"
-    case recipesLibrary = "🧾Recipes Library"
-    case ingredients = "🥕My Ingredients"
-    case skills = "📚Skills"
+enum SideBarItem: String, CaseIterable{
+    case overview
+    case recipesLibrary
+    case ingredients
+    case skills
     
-    var localizedName: String {
-        self.rawValue
+    var displayName: String {
+        switch self {
+        case .overview:
+            return "Overview"
+        case .recipesLibrary:
+            return "Recipes Library"
+        case .ingredients:
+            return "My Ingredients"
+        case .skills:
+            return "Skills"
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .overview:
+            return "house"
+        case .recipesLibrary:
+            return "book"
+        case .ingredients:
+            return "banana"
+        case .skills:
+            return "graduation-cap"
+        }
     }
 }
 
@@ -118,8 +180,3 @@ func detailViewFactory(_ selectedItem: SideBarItem) -> some View{
     ContentView()
         .modelContainer(previewContainer)
 }
-
-
-
-
-
