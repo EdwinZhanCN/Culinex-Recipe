@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "31C97E5C2B755C2B00A69DF7"
-               BuildableName = "iCooking.app"
-               BlueprintName = "iCooking"
-               ReferencedContainer = "container:iCooking.xcodeproj">
+               BuildableName = "Culinex.app"
+               BlueprintName = "Culinex"
+               ReferencedContainer = "container:Culinex.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31C97E5C2B755C2B00A69DF7"
-            BuildableName = "iCooking.app"
-            BlueprintName = "iCooking"
-            ReferencedContainer = "container:iCooking.xcodeproj">
+            BuildableName = "Culinex.app"
+            BlueprintName = "Culinex"
+            ReferencedContainer = "container:Culinex.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31C97E5C2B755C2B00A69DF7"
-            BuildableName = "iCooking.app"
-            BlueprintName = "iCooking"
-            ReferencedContainer = "container:iCooking.xcodeproj">
+            BuildableName = "Culinex.app"
+            BlueprintName = "Culinex"
+            ReferencedContainer = "container:Culinex.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

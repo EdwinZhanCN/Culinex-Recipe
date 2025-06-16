@@ -13,7 +13,7 @@
 		314197072CD980DE00C5168A /* SkillARQuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314197062CD980D500C5168A /* SkillARQuickLook.swift */; };
 		314197092CD982EA00C5168A /* cup_saucer_set.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 314197082CD982EA00C5168A /* cup_saucer_set.usdz */; };
 		31A2E8A02CD2C63D002B54E6 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2E89F2CD2C63B002B54E6 /* Test.swift */; };
-		31C97E612B755C2B00A69DF7 /* iCookingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E602B755C2B00A69DF7 /* iCookingApp.swift */; };
+		31C97E612B755C2B00A69DF7 /* Culinex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E602B755C2B00A69DF7 /* Culinex.swift */; };
 		31C97E632B755C2B00A69DF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C97E622B755C2B00A69DF7 /* ContentView.swift */; };
 		31C97E672B755C2C00A69DF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31C97E662B755C2C00A69DF7 /* Assets.xcassets */; };
 		31C97E6A2B755C2C00A69DF7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31C97E692B755C2C00A69DF7 /* Preview Assets.xcassets */; };
@@ -45,8 +45,8 @@
 		314197062CD980D500C5168A /* SkillARQuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillARQuickLook.swift; sourceTree = "<group>"; };
 		314197082CD982EA00C5168A /* cup_saucer_set.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = cup_saucer_set.usdz; sourceTree = "<group>"; };
 		31A2E89F2CD2C63B002B54E6 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		31C97E5D2B755C2B00A69DF7 /* iCooking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCooking.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		31C97E602B755C2B00A69DF7 /* iCookingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCookingApp.swift; sourceTree = "<group>"; };
+		31C97E5D2B755C2B00A69DF7 /* Culinex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culinex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		31C97E602B755C2B00A69DF7 /* Culinex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Culinex.swift; sourceTree = "<group>"; };
 		31C97E622B755C2B00A69DF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		31C97E662B755C2C00A69DF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31C97E692B755C2C00A69DF7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		31C97E542B755C2B00A69DF7 = {
 			isa = PBXGroup;
 			children = (
-				31C97E5F2B755C2B00A69DF7 /* iCooking */,
+				31C97E5F2B755C2B00A69DF7 /* Culinex */,
 				31E814A22CD6E6A60092C015 /* Frameworks */,
 				31C97E5E2B755C2B00A69DF7 /* Products */,
 			);
@@ -118,12 +118,12 @@
 		31C97E5E2B755C2B00A69DF7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				31C97E5D2B755C2B00A69DF7 /* iCooking.app */,
+				31C97E5D2B755C2B00A69DF7 /* Culinex.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		31C97E5F2B755C2B00A69DF7 /* iCooking */ = {
+		31C97E5F2B755C2B00A69DF7 /* Culinex */ = {
 			isa = PBXGroup;
 			children = (
 				314197082CD982EA00C5168A /* cup_saucer_set.usdz */,
@@ -133,12 +133,12 @@
 				31E599812CD1E3DF0009CB53 /* Preview */,
 				31C97E842B755E4700A69DF7 /* Model */,
 				31C97E822B755E3700A69DF7 /* View */,
-				31C97E602B755C2B00A69DF7 /* iCookingApp.swift */,
+				31C97E602B755C2B00A69DF7 /* Culinex.swift */,
 				314197062CD980D500C5168A /* SkillARQuickLook.swift */,
 				31C97E662B755C2C00A69DF7 /* Assets.xcassets */,
 				31C97E682B755C2C00A69DF7 /* Preview Content */,
 			);
-			path = iCooking;
+			path = Culinex;
 			sourceTree = "<group>";
 		};
 		31C97E682B755C2C00A69DF7 /* Preview Content */ = {
@@ -220,9 +220,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		31C97E5C2B755C2B00A69DF7 /* iCooking */ = {
+		31C97E5C2B755C2B00A69DF7 /* Culinex */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 31C97E6D2B755C2C00A69DF7 /* Build configuration list for PBXNativeTarget "iCooking" */;
+			buildConfigurationList = 31C97E6D2B755C2C00A69DF7 /* Build configuration list for PBXNativeTarget "Culinex" */;
 			buildPhases = (
 				31C97E592B755C2B00A69DF7 /* Sources */,
 				31C97E5A2B755C2B00A69DF7 /* Frameworks */,
@@ -232,9 +232,9 @@
 			);
 			dependencies = (
 			);
-			name = iCooking;
+			name = Culinex;
 			productName = iCooking;
-			productReference = 31C97E5D2B755C2B00A69DF7 /* iCooking.app */;
+			productReference = 31C97E5D2B755C2B00A69DF7 /* Culinex.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -252,7 +252,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 31C97E582B755C2B00A69DF7 /* Build configuration list for PBXProject "iCooking" */;
+			buildConfigurationList = 31C97E582B755C2B00A69DF7 /* Build configuration list for PBXProject "Culinex" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -265,7 +265,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				31C97E5C2B755C2B00A69DF7 /* iCooking */,
+				31C97E5C2B755C2B00A69DF7 /* Culinex */,
 			);
 		};
 /* End PBXProject section */
@@ -311,7 +311,7 @@
 				31CEC3562CD5A1EF0000FC58 /* stepBlockEditingView.swift in Sources */,
 				31C97E8A2B755EE200A69DF7 /* Recipe.swift in Sources */,
 				3130EEF72CD5589700B96217 /* SkillsLibraryView.swift in Sources */,
-				31C97E612B755C2B00A69DF7 /* iCookingApp.swift in Sources */,
+				31C97E612B755C2B00A69DF7 /* Culinex.swift in Sources */,
 				31CEC3522CD5A1CE0000FC58 /* TimerSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +450,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iCooking/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Culinex;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to display augmented reality content.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -460,14 +463,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = online.edwinzhan.iCooking;
+				PRODUCT_BUNDLE_IDENTIFIER = online.edwinzhan.culinex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -483,6 +486,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iCooking/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Culinex;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to display augmented reality content.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -493,21 +499,21 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = online.edwinzhan.iCooking;
+				PRODUCT_BUNDLE_IDENTIFIER = online.edwinzhan.culinex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		31C97E582B755C2B00A69DF7 /* Build configuration list for PBXProject "iCooking" */ = {
+		31C97E582B755C2B00A69DF7 /* Build configuration list for PBXProject "Culinex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				31C97E6B2B755C2C00A69DF7 /* Debug */,
@@ -516,7 +522,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		31C97E6D2B755C2C00A69DF7 /* Build configuration list for PBXNativeTarget "iCooking" */ = {
+		31C97E6D2B755C2C00A69DF7 /* Build configuration list for PBXNativeTarget "Culinex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				31C97E6E2B755C2C00A69DF7 /* Debug */,

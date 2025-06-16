@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct iCookingApp: App {
+struct Culinex: App {
     let container:ModelContainer
     var body: some Scene {
         WindowGroup {
