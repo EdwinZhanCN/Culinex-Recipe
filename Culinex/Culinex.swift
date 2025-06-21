@@ -11,16 +11,20 @@ import SwiftData
 @main
 struct Culinex: App {
     let container:ModelContainer
+    // navigation path for whole app
+    @State private var navigationPath = NavigationPath()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RecipeSplitView(path: $navigationPath)
         }
 //        .modelContainer(container)
         .modelContainer(previewContainer)
     }
     init(){
         let schema = Schema(
-            [FavoriteItem.self, Recipe.self ,Ingredient.self,Skill.self]
+            [FavoriteCollection.self, Recipe.self ,Ingredient.self,Skill.self]
         )
         let config = ModelConfiguration("Magic Recipe", schema: schema)
         do{

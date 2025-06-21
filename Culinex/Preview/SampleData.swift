@@ -8,24 +8,43 @@ import SwiftUI
 import SwiftData
 import Foundation
 
-// Sample Data for Ingredient
-let sampleIngredients: [Ingredient] = [
-    Ingredient(
-        name: "Tomato",
-        image: UIImage(named:"tomato")!.jpegData(compressionQuality: 1.0)
-    ),
-    Ingredient(name: "Onion", image: UIImage(named:"onion")!.jpegData(compressionQuality: 1.0)),
-    Ingredient(name: "Garlic", image: UIImage(named:"garlic")!.jpegData(compressionQuality: 1.0)),
-    Ingredient(name: "Basil", image: UIImage(named:"basil")!.jpegData(compressionQuality: 1.0)),
-    Ingredient(name: "Olive Oil", image: UIImage(named:"olive_oil")!.jpegData(compressionQuality: 1.0))
-]
+let Chopping = Skill(name: "Chopping", ARFileName: "cup_saucer_set.usdz")
 
+let tomatoSoupStep1 = RecipeStep(
+    description: "Chop the tomatoes and onions.",
+    duration: StepTime(value: 5.0, unit: .min),
+    order: 0
+)
 
-// Sample Data for Skill
-let sampleSkills: [Skill] = [
-    Skill(name: "Chopping", category: "Kitchen Skills", ARFileName: "cup_saucer_set"),
-    Skill(name: "Crushing", category: "Kitchen Skills")
-]
+let tomatoSoupStep2 = RecipeStep(
+    description: "Cook the chopped tomatoes and onions in a pot.",
+    duration: StepTime(value: 10.0, unit: .min),
+    order: 1
+)
+
+let Tomato = Ingredient(name: "Tomato")
+let TomatoUsage = RecipeIngredient(
+    quantity: 500,
+    unit: "g",
+    ingredient: Tomato,
+    step: tomatoSoupStep1
+)
+
+let Potato = Ingredient(name: "Potato")
+let PotatoUsage = RecipeIngredient(
+    quantity: 100,
+    unit: "g",
+    ingredient: Potato,
+    step: tomatoSoupStep1
+)
+
+// Sample Recipe
+let tomatoSoupRecipe = Recipe(
+    name: "Tomato Soup",
+    summary: "A simple and delicious tomato soup recipe.",
+    calories: 300,
+)
+
 
 func loadRealityFile(named fileName: String) -> Data? {
     guard let url = Bundle.main.url(forResource: fileName, withExtension: "reality") else {

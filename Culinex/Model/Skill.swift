@@ -2,13 +2,17 @@ import Foundation
 import SwiftData
 
 @Model
-class Skill: Identifiable {
+class Skill: Identifiable, LibraryItem {
     @Attribute(.unique) var id: UUID
     var name: String
     var category: String
     var ARFileName: String?
+    // No @Relationship macro here, we defined in RecipeStep
+    var recipeSteps: [RecipeStep] = []
     
-    @Relationship(inverse: \RecipeStep.skills) var recipeSteps: [RecipeStep] = []
+    var displayName: String {
+        return self.name
+    }
     
     init(
         id: UUID = UUID(),
@@ -33,3 +37,10 @@ class Skill: Identifiable {
         }
     }
 }
+
+/// Usage example:
+//let newSkill = Skill(...)
+//let newStep = RecipeStep(...)
+//
+//newSkill.recipeSteps.append(newStep)
+//modelContext.insert(newSkill)

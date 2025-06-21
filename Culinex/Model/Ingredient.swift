@@ -3,16 +3,16 @@ import SwiftData
 import SwiftUI
 
 @Model
-class Ingredient: Identifiable {
-    @Attribute(.unique) var id: UUID
-    var name: String
+class Ingredient: Identifiable, LibraryItem {
+    @Attribute(.unique) var name: String
     var image: Data?
-    @Relationship(inverse: \RecipeStep.ingredients) var recipeSteps: [RecipeStep] = []
     
-    init(id: UUID = UUID(), name: String, image: Data? = nil) {
-        self.id = id
+    var displayName: String {
+        return self.name
+    }
+    
+    init(name: String, image: Data? = nil) {
         self.name = name
         self.image = image
     }
 }
-

@@ -2,11 +2,11 @@ import Foundation
 import SwiftData
 
 @Model
-class FavoriteItem: Identifiable {
+class FavoriteCollection: Identifiable {
     @Attribute(.unique) var id: UUID
     var name: String
     
-    @Relationship var recipes: [Recipe]
+    var recipes: [Recipe]
     
     init(id: UUID = UUID(), name: String, recipes: [Recipe]) {
         self.id = id
