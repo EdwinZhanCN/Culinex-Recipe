@@ -28,7 +28,11 @@ struct StepInfoView: View {
             }
             Section(header: Text("Ingredients")){
                 ForEach(recipeStep.stepIngredients){ stepIngredient in
-                    IngredientCardView(ingredient: stepIngredient.ingredient)
+                    if let ingredient = stepIngredient.ingredient {
+                        IngredientCardView(ingredient: ingredient)
+                    } else {
+                        Text("Missing Ingredient")
+                    }
                 }
             }
             Section(header: Text("Skills")){

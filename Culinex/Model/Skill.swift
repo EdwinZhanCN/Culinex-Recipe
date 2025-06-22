@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Skill: Identifiable, LibraryItem {
+class Skill: Identifiable {
     @Attribute(.unique) var id: UUID
     var name: String
     var category: String

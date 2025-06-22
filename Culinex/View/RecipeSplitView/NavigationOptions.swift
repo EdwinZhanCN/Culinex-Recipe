@@ -17,10 +17,12 @@ enum NavigationOptions: Equatable, Hashable, Identifiable {
     case ingredients
     /// A case that represents viewing the app's collection of skills.
     case skills
+    /// A case that represents viewing the favorite collection of recipes.
+    case favorites
     
     
     
-    static let mainPages: [NavigationOptions] = [.home, .recipes, .ingredients, .skills]
+    static let mainPages: [NavigationOptions] = [.home, .recipes, .ingredients, .skills, .favorites]
     
     var id: String {
         switch self {
@@ -28,6 +30,7 @@ enum NavigationOptions: Equatable, Hashable, Identifiable {
         case .recipes: return "Recipes Library"
         case .ingredients: return "Ingredients Library"
         case .skills: return "Skills Library"
+        case .favorites: return "Favorites Collection"
         }
     }
     
@@ -43,6 +46,10 @@ enum NavigationOptions: Equatable, Hashable, Identifiable {
             "Skills Library",
             comment: "Title for the Skills Library tab, shown in the sidebar."
         )
+        case .favorites: LocalizedStringResource(
+            "Favorites Collection",
+            comment: "Title for the Favorites Collection tab, shown in the sidebar."
+        )
         }
     }
     
@@ -52,6 +59,7 @@ enum NavigationOptions: Equatable, Hashable, Identifiable {
         case .recipes: "list.bullet.rectangle.portrait"
         case .ingredients: "carrot"
         case .skills: "graduationcap"
+        case .favorites: "star"
         }
     }
     
@@ -63,10 +71,11 @@ enum NavigationOptions: Equatable, Hashable, Identifiable {
         case .recipes:
             RecipesView()
         case .ingredients:
-            RecipesView()
+            IngredientsView()
         case .skills:
-            RecipesView()
+            SkillsGrid(forEditing: false)
+        case .favorites:
+            FavoritesGrid()
         }
-        
     }
 }

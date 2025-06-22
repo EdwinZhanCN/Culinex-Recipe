@@ -49,6 +49,7 @@ struct SkillCardView: View {
                 .fill(Color(colorScheme == .dark ? UIColor.systemGray5 : UIColor.systemGray6))
                 .shadow(radius: 2)
         )
+        #if os(iOS)
         .fullScreenCover(isPresented: $toggleARQuickLookView) {
             ZStack {
                 // Add a subtle dark material background for better AR focus
@@ -82,6 +83,7 @@ struct SkillCardView: View {
                 }
             }
         }
+        #endif
     }
 }
 

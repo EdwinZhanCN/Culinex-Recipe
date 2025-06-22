@@ -39,6 +39,7 @@ let previewContainer: ModelContainer = {
         tomatoSoupStep1.skills.append(Chopping)
         tomatoSoupRecipe.steps.append(tomatoSoupStep1)
         tomatoSoupRecipe.steps.append(tomatoSoupStep2)
+        sampleFavoriteCollection.recipes.append(tomatoSoupRecipe)
 
         // 3. 将所有独立的 @Model 对象插入 Context
         // 注意：因为 RecipeIngredient 的关系设置了 .cascade，
@@ -47,6 +48,8 @@ let previewContainer: ModelContainer = {
         container.mainContext.insert(Tomato)
         container.mainContext.insert(Chopping) // Skill 如果是独立可重用的，也应该被插入
         container.mainContext.insert(tomatoSoupRecipe)
+        container.mainContext.insert(sampleFavoriteCollection)
+    
         
         return container
     } catch {

@@ -18,13 +18,25 @@ struct Culinex: App {
     var body: some Scene {
         WindowGroup {
             RecipeSplitView(path: $navigationPath)
+                
         }
+        #if os(macOS)
+        .windowStyle(.hiddenTitleBar)
+        #endif
 //        .modelContainer(container)
         .modelContainer(previewContainer)
+        
     }
     init(){
         let schema = Schema(
-            [FavoriteCollection.self, Recipe.self ,Ingredient.self,Skill.self]
+            [
+                FavoriteCollection.self,
+                Recipe.self,
+                RecipeStep.self,
+                RecipeIngredient.self,
+                Ingredient.self,
+                Skill.self
+            ]
         )
         let config = ModelConfiguration("Magic Recipe", schema: schema)
         do{

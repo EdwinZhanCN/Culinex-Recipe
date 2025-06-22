@@ -14,7 +14,7 @@ class Recipe: Identifiable {
     var steps = [RecipeStep]()
     
     @Relationship(inverse: \FavoriteCollection.recipes)
-    var favoriteItem: FavoriteCollection? // Optional relationship to a favorite item
+    var favoriteCollection: [FavoriteCollection]? // Optional relationship to a favorite item
 
     // Stored properties that you want to omit from writes to the persistent storage
     @Transient

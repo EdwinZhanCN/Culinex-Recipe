@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct StepEditorForm: View {
-    let recipeStep: RecipeStep
+    @Bindable var recipeStep: RecipeStep
     @State private var selection: StepEditorFormOptions = .setDescription
-    let shouldShowBadge = true
+    @Environment(\.modelContext) private var modelContext
+    @State private var shouldShowBadge = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -103,12 +105,17 @@ struct SetDescriptionView: View {
 }
 
 struct SetIngredientView: View {
-    @Environment(\.modelContext) private var context
+    @Query(sort: \Ingredient.name) private var ingredients: [Ingredient]
+    @Environment(\.modelContext) private var modelContext
     var body: some View {
-        GenericLibraryListView(
-            sort: SortDescriptor(\Ingredient.name),
-            navigationTitle: "Ingredients",
-        )
+        List(ingredients) { ingredient in
+            Text(ingredient.name)
+                .swipeActions{
+                    Button("Delete", systemImage: "trash", role: .destructive) {
+                        modelContext.delete(ingredient)
+                    }
+                }
+        }
     }
 }
 
@@ -125,12 +132,18 @@ struct SetTimerView: View {
 }
 
 struct SetSkillView: View {
-    @Environment(\.modelContext) private var context
+    @Query(sort: \Skill.name) private var skills: [Skill]
+    @Environment(\.modelContext) private var modelContext
     var body: some View {
-        GenericLibraryListView(
-            sort: SortDescriptor(\Skill.name),
-            navigationTitle: "Skill",
-        )
+        List(skills) { skill in
+            Text(skill.name)
+                .foregroundStyle(.primary)
+                .swipeActions {
+                    Button("Delete", systemImage: "trash", role: .destructive) {
+                        modelContext.delete(skill)
+                    }
+                }
+        }
     }
 }
 

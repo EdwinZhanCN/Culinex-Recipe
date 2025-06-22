@@ -9,6 +9,7 @@ import SwiftUI
 import QuickLook
 import ARKit
 
+#if os(iOS)
 struct QLModel: UIViewControllerRepresentable {
     var name: String
     var allowScaling: Bool = true
@@ -48,3 +49,4 @@ struct QLModel: UIViewControllerRepresentable {
         }
     }
 }
+#endif

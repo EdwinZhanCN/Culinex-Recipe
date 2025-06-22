@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct RecipeDetailStepsView: View {
-    let recipe: Recipe
+    @Bindable var recipe: Recipe
     @Binding var state: InspectorState
+    @Binding var inspectorPresented: Bool
 
     private var sortedSteps: [RecipeStep] {
         recipe.steps.sorted { $0.order < $1.order }
@@ -51,6 +52,9 @@ struct RecipeDetailStepsView: View {
                         Spacer()
                         Button(action: {
                             state = .editing(step)
+                            if !inspectorPresented {
+                                inspectorPresented = true
+                            }
                         }) {
                             Image(systemName: "pencil")
                                 .imageScale(.medium)
@@ -58,42 +62,85 @@ struct RecipeDetailStepsView: View {
                         .buttonStyle(.borderless)
                     }
                 ) {
-                    Text(step.descrip).tag(step)
-                    IngredientHScrollView(
-                        recipeIngredient: step.stepIngredients
-                    )
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(step.descrip).tag(step)
+                        IngredientHScrollView(step: step)
+                        SkillHScrollView(step: step)
+                    }
                 }
+                .tag(step)
             }
         }
         .disabled(isEditing)
+        .listRowSeparator(.hidden)
     }
 }
 
 
 
+import SwiftUI
+
 struct IngredientHScrollView: View {
-    let recipeIngredient: [RecipeIngredient]
-    var onDrop: ((PersistentIdentifier) -> Void)? = nil
+    // 接收整个 Step 对象，它是一个可观察的数据源
+    @State var step: RecipeStep
+
+    // 将原有的数组排序逻辑（如果需要）移到这里
+    private var sortedIngredients: [RecipeIngredient] {
+        // 如果你的 RecipeIngredient 需要排序，可以在这里处理
+        step.stepIngredients.sorted { $0.ingredient?.name ?? "" < $1.ingredient?.name ?? "" }
+    }
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(recipeIngredient) { recipeIngredient in
+                // 直接在 body 中访问 step.stepIngredients
+                // SwiftUI 会确保当它变化时，body 会被重新渲染
+                ForEach(sortedIngredients) { recipeIngredient in
                     HStack{
-                        Text(recipeIngredient.ingredient.name)
+                        Text(recipeIngredient.ingredient?.name ?? "Unknown Ingredient")
+                        // 你的格式化字符串可能需要调整，这里假设 quantity 是 Double
                         Text("\(recipeIngredient.quantity, specifier: "%.1f") \(recipeIngredient.unit)")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     .padding(5)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.primary)
                     .background(
                         RoundedRectangle(cornerRadius: 6)
-                            .foregroundStyle(.link)
+                            .foregroundStyle(.indigo)
                     )
                 }
             }
         }
-        .padding(.horizontal, 5)
+    }
+}
+
+struct SkillHScrollView: View {
+    @State var step: RecipeStep
+    
+    private var sortedSkills: [Skill] {
+        // 如果你的 RecipeIngredient 需要排序，可以在这里处理
+        step.skills.sorted { $0.name < $1.name }
+    }
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(sortedSkills) { skill in
+                    HStack{
+                        Text(skill.name)
+                        Text(skill.category)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(5)
+                    .foregroundStyle(.primary)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .foregroundStyle(.orange)
+                    )
+                }
+            }
+        }
     }
 }
 

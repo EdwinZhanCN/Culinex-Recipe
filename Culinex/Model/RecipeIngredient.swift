@@ -1,4 +1,3 @@
-//
 //  RecipeIngredient.swift
 //  Culinex
 //
@@ -17,10 +16,9 @@ final class RecipeIngredient: Identifiable {
     // Relashionship, which step does this amount of recipe belongs to?
     // One to ...
     @Relationship(inverse: \RecipeStep.stepIngredients)
-    var step: RecipeStep
+    var step: RecipeStep?
     
-    // Relashionship, which ingredient we want to establish actually is
-    var ingredient: Ingredient
+    var ingredient: Ingredient?
     
     init(quantity: Double, unit: String, ingredient: Ingredient, step:RecipeStep) {
         self.quantity = quantity

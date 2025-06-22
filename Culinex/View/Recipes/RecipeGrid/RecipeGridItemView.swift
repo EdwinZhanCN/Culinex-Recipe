@@ -11,13 +11,12 @@ import SwiftUI
 
 /// A card view for displaying a recipe in a grid layout.
 struct RecipeGridItemView: View {
-    var recipe: Recipe
+    @Bindable var recipe: Recipe
     
     var body: some View {
         ZStack {
-            // 1. 背景颜色现在会填满整个容器，由外部的 containerShape 来裁剪
-            Color.dynamicColor(for: recipe.name)
-
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color.dynamicColor(for: recipe.name))
             // 2. 修复图标变形问题，并让它作为柔和的背景
             Image(systemName: "carrot.fill") // 使用 .fill 版本可能更好看
                 .resizable()
@@ -37,6 +36,16 @@ struct RecipeGridItemView: View {
         }
         // 4. 使用单一的 containerShape 来定义卡片的最终形状和点击区域
         .containerShape(.rect(cornerRadius: 20))
+        .contextMenu{
+            Button{
+                print("Favorite tapped for \(recipe.name)")
+            }label: {
+                Label("Add to Favorite", systemImage: "star.fill")
+                    .foregroundColor(.primary)
+                    .font(.title2)
+            }
+        }
+        
     }
 }
 
@@ -45,13 +54,16 @@ struct Header: View {
     var recipe: Recipe
     
     var body: some View {
-        Text(recipe.name)
-            .font(.headline)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 12)
-            .background(.black.opacity(0.6), in: Capsule()) // 使用胶囊形状可能更美观
+        HStack{
+            Text(recipe.name)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .background(.black.opacity(0.6), in: Capsule()) // 使用胶囊形状可能更美观
+        }
+        .padding(.horizontal, 12)
     }
 }
 

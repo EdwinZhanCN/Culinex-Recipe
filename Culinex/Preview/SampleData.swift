@@ -45,6 +45,11 @@ let tomatoSoupRecipe = Recipe(
     calories: 300,
 )
 
+// Sample Favorite Collection
+let sampleFavoriteCollection = FavoriteCollection(
+    name: "My Favorite Recipes"
+)
+
 
 func loadRealityFile(named fileName: String) -> Data? {
     guard let url = Bundle.main.url(forResource: fileName, withExtension: "reality") else {
