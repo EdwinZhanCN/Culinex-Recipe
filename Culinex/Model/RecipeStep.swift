@@ -34,3 +34,20 @@ class RecipeStep: Identifiable {
         self.order = order
     }
 }
+
+extension Recipe {
+    
+    /// 计算属性：返回一个包含所有步骤中不重复技能的数组
+    @Transient
+    var allSkills: [Skill] {
+        // 1. 拍平所有步骤中的技能数组
+        let allSkillsInSteps = self.steps.flatMap { $0.skills }
+        
+        // 2. 使用 Set 来去除重复的技能
+        // 注意：这要求 Skill 类型是 Hashable 的，\@Model 默认符合
+        let uniqueSkills = Set(allSkillsInSteps)
+        
+        // 3. 转换回数组并排序，以确保显示顺序稳定
+        return Array(uniqueSkills).sorted { $0.name < $1.name } // 假设 Skill 有一个 name 属性
+    }
+}

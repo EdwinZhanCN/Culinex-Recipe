@@ -17,9 +17,14 @@ struct StepInfoView: View {
     }
     
     var body: some View {
+        Text("Step \(recipeStep.order+1)")
+            .font(.title)
+            .fontWeight(.bold)
+        Text(recipeStep.descrip)
+            .font(.body)
+            .padding(.bottom, 10)
         List{
-            Text("Step \(recipeStep.order+1)")
-                .font(.title)
+            
             Section(header: Text("Duration")) {
                 HStack {
                     Image(systemName: "timer")

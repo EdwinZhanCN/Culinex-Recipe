@@ -12,6 +12,7 @@ struct RecipeSplitView: View{
     @Environment(\.modelContext) var context
     @State private var preferredColumn: NavigationSplitViewColumn = .detail
     @Binding var path: NavigationPath
+    @State private var isPresentingSettings = false
     
     var body: some View {
         NavigationSplitView(preferredCompactColumn: $preferredColumn) {
@@ -38,6 +39,18 @@ struct RecipeSplitView: View{
                 } // TODO: More navigation destinations as needed
             }
             .frame(minWidth: 150)
+            .toolbar{
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        isPresentingSettings.toggle()
+                    }) {
+                        Label("Settings", systemImage: "gear")
+                    }
+                }
+            }
+            .sheet(isPresented: $isPresentingSettings) {
+                CulinexAppSettingsView()
+            }
         } detail: {
             NavigationStack(path: $path) {
                 NavigationOptions.recipes.viewForPage()

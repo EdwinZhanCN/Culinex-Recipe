@@ -56,7 +56,7 @@ struct RecipeDetailStepsView: View {
                                 inspectorPresented = true
                             }
                         }) {
-                            Image(systemName: "pencil")
+                            Image(systemName: "square.and.pencil")
                                 .imageScale(.medium)
                         }
                         .buttonStyle(.borderless)
@@ -67,8 +67,8 @@ struct RecipeDetailStepsView: View {
                         IngredientHScrollView(step: step)
                         SkillHScrollView(step: step)
                     }
-                }
-                .tag(step)
+                    .tag(step)
+                }                    
             }
         }
         .disabled(isEditing)
@@ -82,7 +82,9 @@ import SwiftUI
 
 struct IngredientHScrollView: View {
     // 接收整个 Step 对象，它是一个可观察的数据源
-    @State var step: RecipeStep
+    let step: RecipeStep
+    @AppStorage("quantityDisplayStyle") private var displayStyle: QuantityDisplayStyle = .fraction
+
 
     // 将原有的数组排序逻辑（如果需要）移到这里
     private var sortedIngredients: [RecipeIngredient] {
@@ -99,7 +101,7 @@ struct IngredientHScrollView: View {
                     HStack{
                         Text(recipeIngredient.ingredient?.name ?? "Unknown Ingredient")
                         // 你的格式化字符串可能需要调整，这里假设 quantity 是 Double
-                        Text("\(recipeIngredient.quantity, specifier: "%.1f") \(recipeIngredient.unit)")
+                        Text("\(recipeIngredient.format(using: displayStyle)) \(recipeIngredient.unit)")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -116,7 +118,7 @@ struct IngredientHScrollView: View {
 }
 
 struct SkillHScrollView: View {
-    @State var step: RecipeStep
+    let step: RecipeStep
     
     private var sortedSkills: [Skill] {
         // 如果你的 RecipeIngredient 需要排序，可以在这里处理

@@ -12,7 +12,8 @@ struct StepEditorForm: View {
     @Bindable var recipeStep: RecipeStep
     @State private var selection: StepEditorFormOptions = .setDescription
     @Environment(\.modelContext) private var modelContext
-    @State private var shouldShowBadge = false
+    @Environment(\.dismiss) private var dismiss
+    @State private var shouldShowBadge: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -21,6 +22,7 @@ struct StepEditorForm: View {
             contentArea
         }
     }
+
     
     private var buttonGrid: some View {
         Grid(horizontalSpacing: 10, verticalSpacing: 10) {
@@ -49,6 +51,7 @@ struct StepEditorForm: View {
                         .gridCellColumns(2)
                 }
             }
+
         }
         .padding()
     }
@@ -58,7 +61,7 @@ struct StepEditorForm: View {
         ZStack {
             switch selection {
             case .setDescription: SetDescriptionView()
-            case .setIngredients: SetIngredientView()
+            case .setIngredients: SetIngredientView(recipeStep: recipeStep)
             case .setTools: SetToolsView()
             case .setTimer: SetTimerView()
             case .setSkills: SetSkillView()
@@ -98,52 +101,12 @@ struct StepEditorForm: View {
 }
 
 // 您的占位符视图，保持不变
-struct SetDescriptionView: View {
-    var body: some View {
-        Text("Set Description View").font(.title)
-    }
-}
 
-struct SetIngredientView: View {
-    @Query(sort: \Ingredient.name) private var ingredients: [Ingredient]
-    @Environment(\.modelContext) private var modelContext
-    var body: some View {
-        List(ingredients) { ingredient in
-            Text(ingredient.name)
-                .swipeActions{
-                    Button("Delete", systemImage: "trash", role: .destructive) {
-                        modelContext.delete(ingredient)
-                    }
-                }
-        }
-    }
-}
 
-struct SetToolsView: View {
-    var body: some View {
-        Text("Set Tools View").font(.title)
-    }
-}
 
-struct SetTimerView: View {
-    var body: some View {
-        Text("Set Timer View").font(.title)
-    }
-}
 
-struct SetSkillView: View {
-    @Query(sort: \Skill.name) private var skills: [Skill]
-    @Environment(\.modelContext) private var modelContext
-    var body: some View {
-        List(skills) { skill in
-            Text(skill.name)
-                .foregroundStyle(.primary)
-                .swipeActions {
-                    Button("Delete", systemImage: "trash", role: .destructive) {
-                        modelContext.delete(skill)
-                    }
-                }
-        }
-    }
-}
+
+
+
+
 

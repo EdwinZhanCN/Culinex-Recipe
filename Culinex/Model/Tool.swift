@@ -8,7 +8,9 @@
 import Foundation
 import SwiftData
 
-struct Tool: Codable, Equatable {
+
+struct Tool: Identifiable, Codable, Equatable {
+    var id: UUID = UUID()
     var name: String
     var description: String?
     

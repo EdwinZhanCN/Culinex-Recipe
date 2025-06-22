@@ -15,6 +15,7 @@ import AppKit
 struct IngredientCardView: View {
     @Environment(\.colorScheme) var colorScheme
     @Bindable var ingredient: Ingredient
+    @State private var showFullText = false
     
     private var ingredientImage: Image {
         #if canImport(UIKit)
@@ -37,13 +38,32 @@ struct IngredientCardView: View {
     var body: some View {
         HStack {
             Text(ingredient.name)
-                .font(.title2)
+                .font(.body)
                 .bold()
+                .lineLimit(2)
+                .onTapGesture {
+                    showFullText = true
+                }
+                // 3. 附加 popover 修饰符
+                .popover(isPresented: $showFullText, arrowEdge: .leading) {
+                    // 这是浮窗中显示的内容
+                    VStack {
+                        Text(ingredient.name)
+                            .font(.headline)
+                            .padding()
+                        Button("Close") {
+                            showFullText = false
+                        }
+                        .padding(.bottom)
+                    }
+                    // 在 iOS 16.4+ 上可以设置浮窗的大小
+                    .presentationCompactAdaptation(.popover)
+                }
             Spacer()
             ingredientImage
                 .resizable()
                 .scaledToFit()
-                .frame(width: 70, height: 70)
+                .frame(width: 40, height: 40)
                 .cornerRadius(8)
         }
         .padding()

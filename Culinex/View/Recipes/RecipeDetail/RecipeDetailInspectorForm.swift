@@ -16,14 +16,10 @@ struct RecipeDetailInspectorForm: View {
         // 根据 state 的不同情况，显示不同的视图
         switch state {
         case .idle:
-            // 空闲时显示菜谱摘要
-            Text(recipe.summary)
-                .padding()
-        
+            RecipeDetailInfoView(recipe: recipe)
         case .info(let step):
             // info 状态时显示步骤详情
             StepInfoView(recipeStep: step)
-        
         case .editing(let step):
             // editing 状态时显示步骤编辑器
             StepEditorForm(recipeStep: step)

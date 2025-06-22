@@ -9,11 +9,13 @@ import Foundation
 import SwiftUI
 
 enum StepEditorFormOptions: Equatable, Hashable, Identifiable, CaseIterable {
+    
     case setIngredients
     case setTimer
     case setSkills
     case setTools
     case setDescription
+    
     
     var id: String {
         switch self {
@@ -31,7 +33,7 @@ enum StepEditorFormOptions: Equatable, Hashable, Identifiable, CaseIterable {
         case .setTimer: "timer"
         case .setSkills: "graduationcap"
         case .setTools: "hammer"
-        case .setDescription: "pencil"
+        case .setDescription: "pencil.line"
         }
     }
     

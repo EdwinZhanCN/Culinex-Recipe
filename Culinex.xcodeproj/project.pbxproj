@@ -41,6 +41,14 @@
 		31CD36362E07917B00539525 /* FavoritesGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36352E07916E00539525 /* FavoritesGridItemView.swift */; };
 		31CD36382E07981200539525 /* FavoritesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36372E07980B00539525 /* FavoritesDetailView.swift */; };
 		31CD363A2E07A10300539525 /* SkillsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36392E07A0F800539525 /* SkillsGrid.swift */; };
+		31CD363D2E07AF1F00539525 /* SetIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD363C2E07AF1F00539525 /* SetIngredientView.swift */; };
+		31CD363F2E07B5FA00539525 /* SetDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD363E2E07B5FA00539525 /* SetDescriptionView.swift */; };
+		31CD36412E07B60300539525 /* SetToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36402E07B60300539525 /* SetToolsView.swift */; };
+		31CD36432E07B61000539525 /* SetTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36422E07B61000539525 /* SetTimerView.swift */; };
+		31CD36452E07B61900539525 /* SetSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36442E07B61900539525 /* SetSkillView.swift */; };
+		31CD364A2E07D9E400539525 /* CalculatorNumberPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36492E07D9E400539525 /* CalculatorNumberPickerView.swift */; };
+		31CD364C2E07E2F400539525 /* RecipeDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD364B2E07E2F400539525 /* RecipeDetailInfoView.swift */; };
+		31CD364E2E07F09C00539525 /* CulinexAppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD364D2E07F09C00539525 /* CulinexAppSettingsView.swift */; };
 		31E599832CD1E40B0009CB53 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E599822CD1E3EC0009CB53 /* SampleData.swift */; };
 		31E5998A2CD1E9450009CB53 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E599892CD1E9360009CB53 /* PreviewContainer.swift */; };
 		31E814A52CD6E6AD0092C015 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E814A32CD6E6A60092C015 /* Photos.framework */; };
@@ -83,6 +91,14 @@
 		31CD36352E07916E00539525 /* FavoritesGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridItemView.swift; sourceTree = "<group>"; };
 		31CD36372E07980B00539525 /* FavoritesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailView.swift; sourceTree = "<group>"; };
 		31CD36392E07A0F800539525 /* SkillsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsGrid.swift; sourceTree = "<group>"; };
+		31CD363C2E07AF1F00539525 /* SetIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIngredientView.swift; sourceTree = "<group>"; };
+		31CD363E2E07B5FA00539525 /* SetDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDescriptionView.swift; sourceTree = "<group>"; };
+		31CD36402E07B60300539525 /* SetToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetToolsView.swift; sourceTree = "<group>"; };
+		31CD36422E07B61000539525 /* SetTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerView.swift; sourceTree = "<group>"; };
+		31CD36442E07B61900539525 /* SetSkillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSkillView.swift; sourceTree = "<group>"; };
+		31CD36492E07D9E400539525 /* CalculatorNumberPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorNumberPickerView.swift; sourceTree = "<group>"; };
+		31CD364B2E07E2F400539525 /* RecipeDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInfoView.swift; sourceTree = "<group>"; };
+		31CD364D2E07F09C00539525 /* CulinexAppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulinexAppSettingsView.swift; sourceTree = "<group>"; };
 		31E599822CD1E3EC0009CB53 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		31E599892CD1E9360009CB53 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		31E814A32CD6E6A60092C015 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -134,6 +150,7 @@
 			children = (
 				316F0A5E2E050F36007FAFC4 /* RecipeDetailSteps */,
 				316F0A592E0507B5007FAFC4 /* RecipeDetailInspectorForm.swift */,
+				31CD364B2E07E2F400539525 /* RecipeDetailInfoView.swift */,
 				316F0A552E0504D5007FAFC4 /* RecipeDetailView.swift */,
 			);
 			path = RecipeDetail;
@@ -142,6 +159,7 @@
 		316F0A5E2E050F36007FAFC4 /* RecipeDetailSteps */ = {
 			isa = PBXGroup;
 			children = (
+				31CD363B2E07AF0700539525 /* EditorFormSetViews */,
 				318176322E063D0D001B5CE1 /* StepInfoView.swift */,
 				316F0A612E051100007FAFC4 /* StepEditorFormOptions.swift */,
 				316F0A5F2E050F4F007FAFC4 /* StepEditorForm.swift */,
@@ -153,8 +171,9 @@
 		3181769B2E064B9C001B5CE1 /* Ingredients */ = {
 			isa = PBXGroup;
 			children = (
+				318176992E064B90001B5CE1 /* IngredientCardView.swift */,
+				31AE4A512E0696E100C3EBCE /* IngredientGird.swift */,
 				31AE4A532E06973A00C3EBCE /* IngredientsView.swift */,
-				31AE4A502E0696AB00C3EBCE /* IngredientGrid */,
 			);
 			path = Ingredients;
 			sourceTree = "<group>";
@@ -167,15 +186,6 @@
 				314197062CD980D500C5168A /* SkillARQuickLook.swift */,
 			);
 			path = Skills;
-			sourceTree = "<group>";
-		};
-		31AE4A502E0696AB00C3EBCE /* IngredientGrid */ = {
-			isa = PBXGroup;
-			children = (
-				318176992E064B90001B5CE1 /* IngredientCardView.swift */,
-				31AE4A512E0696E100C3EBCE /* IngredientGird.swift */,
-			);
-			path = IngredientGrid;
 			sourceTree = "<group>";
 		};
 		31C97E542B755C2B00A69DF7 = {
@@ -205,7 +215,6 @@
 				31E599812CD1E3DF0009CB53 /* Preview */,
 				31C97E842B755E4700A69DF7 /* Model */,
 				31C97E822B755E3700A69DF7 /* View */,
-				31C97E602B755C2B00A69DF7 /* Culinex.swift */,
 				31C97E662B755C2C00A69DF7 /* Assets.xcassets */,
 				31C97E682B755C2C00A69DF7 /* Preview Content */,
 			);
@@ -223,8 +232,10 @@
 		31C97E822B755E3700A69DF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				31C97E602B755C2B00A69DF7 /* Culinex.swift */,
+				31CD364D2E07F09C00539525 /* CulinexAppSettingsView.swift */,
+				31CD36462E07D9D700539525 /* Utils */,
 				31CD36342E07910B00539525 /* Favorites */,
-				31CD362F2E07865C00539525 /* ViewModifers */,
 				3181769C2E064C24001B5CE1 /* Skills */,
 				3181769B2E064B9C001B5CE1 /* Ingredients */,
 				316F0A4A2E04ED97007FAFC4 /* Recipes */,
@@ -249,13 +260,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		31CD362F2E07865C00539525 /* ViewModifers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModifers;
-			sourceTree = "<group>";
-		};
 		31CD36342E07910B00539525 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +268,26 @@
 				31CD36322E07910000539525 /* FavoritesGrid.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		31CD363B2E07AF0700539525 /* EditorFormSetViews */ = {
+			isa = PBXGroup;
+			children = (
+				31CD36442E07B61900539525 /* SetSkillView.swift */,
+				31CD36422E07B61000539525 /* SetTimerView.swift */,
+				31CD36402E07B60300539525 /* SetToolsView.swift */,
+				31CD363E2E07B5FA00539525 /* SetDescriptionView.swift */,
+				31CD363C2E07AF1F00539525 /* SetIngredientView.swift */,
+			);
+			path = EditorFormSetViews;
+			sourceTree = "<group>";
+		};
+		31CD36462E07D9D700539525 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				31CD36492E07D9E400539525 /* CalculatorNumberPickerView.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		31E599812CD1E3DF0009CB53 /* Preview */ = {
@@ -369,33 +393,41 @@
 				31CD363A2E07A10300539525 /* SkillsGrid.swift in Sources */,
 				314197072CD980DE00C5168A /* SkillARQuickLook.swift in Sources */,
 				316F0A472E04EB3D007FAFC4 /* RecipeSplitView.swift in Sources */,
+				31CD364E2E07F09C00539525 /* CulinexAppSettingsView.swift in Sources */,
+				31CD36412E07B60300539525 /* SetToolsView.swift in Sources */,
 				316F0A4C2E04EDF5007FAFC4 /* RecipeGrid.swift in Sources */,
 				316F0A602E050F75007FAFC4 /* StepEditorForm.swift in Sources */,
 				316F0A662E05B390007FAFC4 /* UTType.swift in Sources */,
 				3130EEF32CD5583B00B96217 /* Skill.swift in Sources */,
 				316F0A532E050168007FAFC4 /* RecipesView.swift in Sources */,
 				316F0A512E04EE9B007FAFC4 /* Constants.swift in Sources */,
+				31CD363F2E07B5FA00539525 /* SetDescriptionView.swift in Sources */,
 				316F0A622E05110F007FAFC4 /* StepEditorFormOptions.swift in Sources */,
+				31CD363D2E07AF1F00539525 /* SetIngredientView.swift in Sources */,
 				316F0A582E05056C007FAFC4 /* RecipeDetailStepsView.swift in Sources */,
 				318176BE2E0668CE001B5CE1 /* RecipeStep.swift in Sources */,
 				318176332E063D1B001B5CE1 /* StepInfoView.swift in Sources */,
 				31CD36362E07917B00539525 /* FavoritesGridItemView.swift in Sources */,
 				3139BD942E04B0F700911B56 /* Tool.swift in Sources */,
 				316F0A562E0504DD007FAFC4 /* RecipeDetailView.swift in Sources */,
+				31CD36452E07B61900539525 /* SetSkillView.swift in Sources */,
 				318176C02E066970001B5CE1 /* StepTime.swift in Sources */,
 				31AE4A522E0696E100C3EBCE /* IngredientGird.swift in Sources */,
 				3139BD962E04C3F400911B56 /* RecipeIngredient.swift in Sources */,
 				318176BC2E06685F001B5CE1 /* RecipeGridItemView.swift in Sources */,
 				31CD36382E07981200539525 /* FavoritesDetailView.swift in Sources */,
+				31CD36432E07B61000539525 /* SetTimerView.swift in Sources */,
 				316F0A5A2E0507C5007FAFC4 /* RecipeDetailInspectorForm.swift in Sources */,
 				3181769E2E064C43001B5CE1 /* SkillCardView.swift in Sources */,
 				31C97E8B2B755EE200A69DF7 /* Ingredient.swift in Sources */,
+				31CD364C2E07E2F400539525 /* RecipeDetailInfoView.swift in Sources */,
 				31CD36332E07910800539525 /* FavoritesGrid.swift in Sources */,
 				316F0A492E04EB4F007FAFC4 /* NavigationOptions.swift in Sources */,
 				31E599832CD1E40B0009CB53 /* SampleData.swift in Sources */,
 				3181769A2E064B90001B5CE1 /* IngredientCardView.swift in Sources */,
 				31AE4A542E06974300C3EBCE /* IngredientsView.swift in Sources */,
 				31C97E8A2B755EE200A69DF7 /* Recipe.swift in Sources */,
+				31CD364A2E07D9E400539525 /* CalculatorNumberPickerView.swift in Sources */,
 				31C97E612B755C2B00A69DF7 /* Culinex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

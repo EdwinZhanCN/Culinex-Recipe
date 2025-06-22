@@ -11,6 +11,8 @@ struct SkillCardView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var toggleARQuickLookView: Bool = false
     @State private var selectedModelFileName: String = ""
+    @State private var showFullText = false
+
     var skill: Skill
     
     private var skillImage: Image {
@@ -20,8 +22,26 @@ struct SkillCardView: View {
     var body: some View {
         HStack {
             Text(skill.name)
-                .font(.title2)
+                .font(.body)
                 .bold()
+                .onTapGesture {
+                    // 点击时显示浮窗
+                    showFullText.toggle()
+                }
+                .popover(isPresented: $showFullText, arrowEdge: .leading) {
+                    // 这是浮窗中显示的内容
+                    VStack {
+                        Text(skill.name)
+                            .font(.headline)
+                            .padding()
+                        Button("Close") {
+                            showFullText = false
+                        }
+                        .padding(.bottom)
+                    }
+                    // 在 iOS 16.4+ 上可以设置浮窗的大小
+                    .presentationCompactAdaptation(.popover)
+                }
             Spacer()
             if let arFile = skill.ARFileName{
                 Button {
@@ -29,7 +49,7 @@ struct SkillCardView: View {
                     selectedModelFileName = arFile
                 } label: {
                     Image(systemName: "cube.transparent")
-                        .font(.system(size: 28, weight: .medium))
+                        .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.accentColor)
                         .padding(14)
                         .background(Circle().fill(Color.accentColor.opacity(0.15)))
@@ -40,7 +60,7 @@ struct SkillCardView: View {
             skillImage
                 .resizable()
                 .scaledToFit()
-                .frame(width: 70, height: 70)
+                .frame(width: 40, height: 40)
                 .cornerRadius(8)
         }
         .padding()

@@ -14,6 +14,8 @@ class Ingredient: Identifiable {
         return self.name
     }
     
+    static let placeholder = Ingredient(name: "Loading...")
+    
     init(name: String, image: Data? = nil) {
         self.name = name
         self.image = image
