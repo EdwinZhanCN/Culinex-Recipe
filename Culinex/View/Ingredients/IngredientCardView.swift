@@ -40,7 +40,7 @@ struct IngredientCardView: View {
             Text(ingredient.name)
                 .font(.body)
                 .bold()
-                .lineLimit(2)
+                .lineLimit(3)
                 .onTapGesture {
                     showFullText = true
                 }

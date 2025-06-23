@@ -73,6 +73,7 @@ struct RecipeDetailStepsView: View {
         }
         .disabled(isEditing)
         .listRowSeparator(.hidden)
+        .navigationTitle(recipe.name)
     }
 }
 

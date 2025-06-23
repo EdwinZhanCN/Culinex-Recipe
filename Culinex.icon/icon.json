@@ -1,0 +1,58 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "display-p3:0.84362,0.94569,0.69633,1.00000",
+      "display-p3:0.67322,0.83813,0.74380,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : {
+            "linear-gradient" : [
+              "display-p3:1.00000,0.35706,0.04669,1.00000",
+              "display-p3:1.00000,0.60452,0.32263,1.00000"
+            ]
+          },
+          "glass" : true,
+          "image-name" : "carrot.png",
+          "name" : "carrot",
+          "position" : {
+            "scale" : 0.95,
+            "translation-in-points" : [
+              -63,
+              -56
+            ]
+          }
+        },
+        {
+          "image-name" : "Component 48.png",
+          "name" : "Component 48",
+          "position" : {
+            "scale" : 0.95,
+            "translation-in-points" : [
+              26.25,
+              -36.75
+            ]
+          }
+        }
+      ],
+      "lighting" : "combined",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

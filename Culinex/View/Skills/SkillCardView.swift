@@ -24,6 +24,7 @@ struct SkillCardView: View {
             Text(skill.name)
                 .font(.body)
                 .bold()
+                .lineLimit(3)
                 .onTapGesture {
                     // 点击时显示浮窗
                     showFullText.toggle()

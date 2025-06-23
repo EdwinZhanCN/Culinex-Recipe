@@ -49,9 +49,11 @@
 		31CD364A2E07D9E400539525 /* CalculatorNumberPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36492E07D9E400539525 /* CalculatorNumberPickerView.swift */; };
 		31CD364C2E07E2F400539525 /* RecipeDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD364B2E07E2F400539525 /* RecipeDetailInfoView.swift */; };
 		31CD364E2E07F09C00539525 /* CulinexAppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD364D2E07F09C00539525 /* CulinexAppSettingsView.swift */; };
+		31CD36512E07F68600539525 /* GenerativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD36502E07F68600539525 /* GenerativeView.swift */; };
 		31E599832CD1E40B0009CB53 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E599822CD1E3EC0009CB53 /* SampleData.swift */; };
 		31E5998A2CD1E9450009CB53 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E599892CD1E9360009CB53 /* PreviewContainer.swift */; };
 		31E814A52CD6E6AD0092C015 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E814A32CD6E6A60092C015 /* Photos.framework */; };
+		31EC4D052E08D78B00AEA78D /* Culinex.icon in Resources */ = {isa = PBXBuildFile; fileRef = 31EC4D042E08D78B00AEA78D /* Culinex.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,10 +101,12 @@
 		31CD36492E07D9E400539525 /* CalculatorNumberPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorNumberPickerView.swift; sourceTree = "<group>"; };
 		31CD364B2E07E2F400539525 /* RecipeDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInfoView.swift; sourceTree = "<group>"; };
 		31CD364D2E07F09C00539525 /* CulinexAppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulinexAppSettingsView.swift; sourceTree = "<group>"; };
+		31CD36502E07F68600539525 /* GenerativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeView.swift; sourceTree = "<group>"; };
 		31E599822CD1E3EC0009CB53 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		31E599892CD1E9360009CB53 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		31E814A32CD6E6A60092C015 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		31E814A82CD6E6C00092C015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		31EC4D042E08D78B00AEA78D /* Culinex.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Culinex.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,7 @@
 		31C97E542B755C2B00A69DF7 = {
 			isa = PBXGroup;
 			children = (
+				31EC4D042E08D78B00AEA78D /* Culinex.icon */,
 				318176312E063696001B5CE1 /* CulinexArtWorkLibrary */,
 				31C97E5F2B755C2B00A69DF7 /* Culinex */,
 				31E814A22CD6E6A60092C015 /* Frameworks */,
@@ -234,6 +239,7 @@
 			children = (
 				31C97E602B755C2B00A69DF7 /* Culinex.swift */,
 				31CD364D2E07F09C00539525 /* CulinexAppSettingsView.swift */,
+				31CD364F2E07F65600539525 /* Intelligence */,
 				31CD36462E07D9D700539525 /* Utils */,
 				31CD36342E07910B00539525 /* Favorites */,
 				3181769C2E064C24001B5CE1 /* Skills */,
@@ -288,6 +294,14 @@
 				31CD36492E07D9E400539525 /* CalculatorNumberPickerView.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		31CD364F2E07F65600539525 /* Intelligence */ = {
+			isa = PBXGroup;
+			children = (
+				31CD36502E07F68600539525 /* GenerativeView.swift */,
+			);
+			path = Intelligence;
 			sourceTree = "<group>";
 		};
 		31E599812CD1E3DF0009CB53 /* Preview */ = {
@@ -378,6 +392,7 @@
 				314197092CD982EA00C5168A /* cup_saucer_set.usdz in Resources */,
 				31C97E6A2B755C2C00A69DF7 /* Preview Assets.xcassets in Resources */,
 				31C97E672B755C2C00A69DF7 /* Assets.xcassets in Resources */,
+				31EC4D052E08D78B00AEA78D /* Culinex.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +425,7 @@
 				31CD36362E07917B00539525 /* FavoritesGridItemView.swift in Sources */,
 				3139BD942E04B0F700911B56 /* Tool.swift in Sources */,
 				316F0A562E0504DD007FAFC4 /* RecipeDetailView.swift in Sources */,
+				31CD36512E07F68600539525 /* GenerativeView.swift in Sources */,
 				31CD36452E07B61900539525 /* SetSkillView.swift in Sources */,
 				318176C02E066970001B5CE1 /* StepTime.swift in Sources */,
 				31AE4A522E0696E100C3EBCE /* IngredientGird.swift in Sources */,
@@ -557,8 +573,9 @@
 		31C97E6E2B755C2C00A69DF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Culinex;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Culinex/Preview Content\"";
@@ -599,8 +616,9 @@
 		31C97E6F2B755C2C00A69DF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Culinex;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Culinex/Preview Content\"";

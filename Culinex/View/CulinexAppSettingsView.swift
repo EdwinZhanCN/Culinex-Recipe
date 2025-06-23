@@ -11,8 +11,9 @@ import SwiftUI
 struct CulinexAppSettingsView: View {
     // --- 存储属性 (与上一步相同) ---
     @AppStorage("username") private var username: String = ""
-    @AppStorage("isNotificationsEnabled") private var isNotificationsEnabled: Bool = true
+    @AppStorage("isNotificationsEnabled") private var isNotificationsEnabled: Bool = false
     @AppStorage("quantityDisplayStyle") private var displayStyle: QuantityDisplayStyle = .fraction
+    @AppStorage("isCulinexIntelligenceEnabled") private var isCulinexIntelligenceEnabled: Bool = false
     
     // 从环境中获取关闭 sheet 的方法
     @Environment(\.dismiss) var dismiss
@@ -59,6 +60,13 @@ struct CulinexAppSettingsView: View {
                         // 以编程方式获取应用版本号，非常专业
                         Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")
                             .foregroundColor(.secondary)
+                    }
+                }
+                Section(header: Text("Intelligence"), footer: Text("Use Apple native intelligence to enhance your experience.")) {
+                    if #available(iOS 26.0, *) {
+                        GenerativeSettingView()
+                    } else {
+                        Text("Intelligence is available on iOS/iPadOS/MacOS 26.0 and later.")
                     }
                 }
             }
