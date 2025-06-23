@@ -33,11 +33,11 @@ struct TimerComponentView: View {
             CircularProgressView(progress: progress)
 
             Text(timeString(from: remainingTime))
-                .font(.system(size: 40, weight: .thin, design: .monospaced))
-                .padding(.horizontal, 5)
+                .font(.system(size: 30, weight: .thin, design: .monospaced))
+                .padding(.horizontal, 10)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
-                .foregroundColor(.white)
+                .foregroundColor(.secondary)
         }
         .padding(20)
         .onReceive(timer) { _ in

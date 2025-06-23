@@ -22,6 +22,8 @@ struct RecipeDetailInspectorForm: View {
         case .editing(let step):
             // editing 状态时显示步骤编辑器
             StepEditorForm(recipeStep: step)
+                .navigationTitle("Step \(step.order + 1)")
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar{
                     Button{
                         saveChanges()

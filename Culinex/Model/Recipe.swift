@@ -24,20 +24,42 @@ class Recipe: Identifiable {
     
     var calories: Int?
     
+    var servingSize: Int? // Default serving size, can be adjusted later
+    
     init(
         name: String,
         summary: String,
         calories: Int? = nil,
+        image: Data? = nil,
+        serveringSize: Int? = 1
     ) {
         self.name = name
         self.summary = summary
         self.creationDate = Date()
         self.calories = calories
+        self.Image = image
+        self.servingSize = serveringSize
     }
     
     var duration: Double {
         return steps.reduce(0) { total, step in
             total + step.duration.durationInSeconds
+        }
+    }
+    
+    var formattedDuration: String {
+        // 将总秒数格式化为易于阅读的字符串
+        let totalSeconds = Int(self.duration)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = totalSeconds % 60
+        
+        if hours > 0 {
+            return "\(hours)hr \(minutes)min \(seconds)sec"
+        } else if minutes > 0 {
+            return "\(minutes)min \(seconds)sec"
+        } else {
+            return "\(seconds)sec"
         }
     }
     

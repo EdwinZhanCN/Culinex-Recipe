@@ -15,12 +15,15 @@ struct RecipeDetailInfoView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             if let imageData = recipe.Image, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 250)
-                    .cornerRadius(12) // 给图片加个圆角
-                    .clipped()
+                HStack {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity, maxHeight: 200) // 设置最大高度并自适应宽度
+                        .cornerRadius(12) // 给图片加个圆角
+                        .clipped()
+                }
+                .frame(maxWidth: .infinity) // 确保 HStack 填充宽度
             }
             
             Text(recipe.name)
@@ -38,7 +41,7 @@ struct RecipeDetailInfoView: View {
                 HStack {
                     Label("Total Duration", systemImage: "clock")
                     Spacer()
-                    Text("\(Int(recipe.duration / 60)) min")
+                    Text(recipe.formattedDuration)
                         .foregroundColor(.secondary)
                 }
                 if let calories = recipe.calories {

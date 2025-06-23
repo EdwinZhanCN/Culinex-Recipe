@@ -78,7 +78,6 @@
 		316F0A5F2E050F4F007FAFC4 /* StepEditorForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepEditorForm.swift; sourceTree = "<group>"; };
 		316F0A612E051100007FAFC4 /* StepEditorFormOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepEditorFormOptions.swift; sourceTree = "<group>"; };
 		316F0A652E05B38A007FAFC4 /* UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTType.swift; sourceTree = "<group>"; };
-		318176312E063696001B5CE1 /* CulinexArtWorkLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CulinexArtWorkLibrary; sourceTree = "<group>"; };
 		318176322E063D0D001B5CE1 /* StepInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepInfoView.swift; sourceTree = "<group>"; };
 		318176992E064B90001B5CE1 /* IngredientCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCardView.swift; sourceTree = "<group>"; };
 		3181769D2E064C43001B5CE1 /* SkillCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillCardView.swift; sourceTree = "<group>"; };
@@ -202,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				312974AE2E0903D000596CC6 /* Culinex.icon */,
-				318176312E063696001B5CE1 /* CulinexArtWorkLibrary */,
 				31C97E5F2B755C2B00A69DF7 /* Culinex */,
 				31E814A22CD6E6A60092C015 /* Frameworks */,
 				31C97E5E2B755C2B00A69DF7 /* Products */,
@@ -615,10 +613,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = online.edwinzhan.culinex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -658,10 +658,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = online.edwinzhan.culinex;
 				PRODUCT_NAME = "$(TARGET_NAME)";

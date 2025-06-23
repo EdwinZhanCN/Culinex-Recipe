@@ -18,7 +18,7 @@ struct StepEditorForm: View {
     var body: some View {
         VStack(alignment: .leading) {
             buttonGrid
-            Divider()
+            Spacer()
             contentArea
         }
     }

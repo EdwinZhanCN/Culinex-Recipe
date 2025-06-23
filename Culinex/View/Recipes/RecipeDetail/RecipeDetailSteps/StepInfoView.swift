@@ -10,12 +10,6 @@ import SwiftData
 struct StepInfoView: View {
     let recipeStep: RecipeStep
     
-    private var durationText: String {
-        let value = recipeStep.duration.value
-        let unit = recipeStep.duration.unit
-        return "\(value) \(unit.toString(value: value))"
-    }
-    
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Text("Step\(recipeStep.order+1)")
@@ -31,7 +25,7 @@ struct StepInfoView: View {
             Section(header: Text("Duration")) {
                 HStack {
                     Image(systemName: "timer")
-                    Text(durationText)
+                    Text(recipeStep.duration.formattedString)
                 }
             }
             Section(header: Text("Ingredients")){

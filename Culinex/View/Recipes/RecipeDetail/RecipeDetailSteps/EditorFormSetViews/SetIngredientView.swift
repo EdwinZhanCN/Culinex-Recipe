@@ -24,31 +24,36 @@ struct SetIngredientView: View {
     }
     
     var body: some View {
-        List {
-            Section(header: HStack {
-                Text("Ingredients")
-                Spacer()
-                Button { showPicker = true } label: { Image(systemName: "plus") }
-                    .disabled(availableIngredients.isEmpty)
-            }) {
-                ForEach(recipeStep.stepIngredients) { ri in
-                    HStack {
-                        IngredientCardView(
-                            ingredient: ri.ingredient ?? Ingredient.placeholder
-                        )
-                        Spacer()
-                        Button("Edit") { editingRecipeIngredient = ri }
+        VStack {
+            Text("Set Ingredients")
+                .font(.title)
+                .bold()
+                .padding(.leading, 10)
+            List {
+                Section(header: HStack {
+                    Text("Ingredients")
+                    Spacer()
+                    Button { showPicker = true } label: { Image(systemName: "plus") }
+                        .disabled(availableIngredients.isEmpty)
+                }) {
+                    ForEach(recipeStep.stepIngredients) { ri in
+                        HStack {
+                            IngredientCardView(
+                                ingredient: ri.ingredient ?? Ingredient.placeholder
+                            )
+                            Spacer()
+                            Button("Edit") { editingRecipeIngredient = ri }
+                        }
                     }
-                }
-                .onDelete { offsets in
-                    offsets.map { recipeStep.stepIngredients[$0] }
-                           .forEach(modelContext.delete)
-                    recipeStep.stepIngredients.remove(atOffsets: offsets)
-                    try? modelContext.save()
+                    .onDelete { offsets in
+                        offsets.map { recipeStep.stepIngredients[$0] }
+                               .forEach(modelContext.delete)
+                        recipeStep.stepIngredients.remove(atOffsets: offsets)
+                        try? modelContext.save()
+                    }
                 }
             }
         }
-        .navigationTitle("Set Ingredients")
         .sheet(isPresented: $showPicker) {
             NavigationStack {
                 if availableIngredients.isEmpty {

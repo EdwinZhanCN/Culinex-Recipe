@@ -15,45 +15,47 @@ struct SetTimerView: View {
     @State private var isShowingPicker = false
     
     var body: some View {
-        Form {
-            // Section 1: 预览 (保持不变)
-            Section {
-                TimerComponentView(
-                    remainingTime: .constant(recipeStep.getTimeInterval()),
-                    totalTime: recipeStep.getTimeInterval(),
-                    isTimerActive: false
-                )
-                .frame(height: 250)
-            } header: {
-                Text("Preview")
-            }
-            
-            // ✅ Section 2: 新的编辑时长方式
-            Section {
-                // 使用 LabeledContent 提供一个清晰的标签和内容布局
-                LabeledContent {
-                    // 显示格式化后的当前时长
-                    Text(recipeStep.duration.formattedString)
-                        .foregroundStyle(.link)
-                } label: {
-                    Text("Duration")
-                        .font(.headline)
-                }
-                .contentShape(Rectangle()) // 让整个区域都可点击
-                .onTapGesture {
-                    isShowingPicker = true // 点击时显示 popover
+        VStack (alignment: .center, spacing: 10){
+            Text("Set Timer")
+                .font(.title)
+                .bold()
+                .padding(.leading, 10)
+            Form {
+                Section {
+                    TimerComponentView(
+                        remainingTime: .constant(recipeStep.getTimeInterval()),
+                        totalTime: recipeStep.getTimeInterval(),
+                        isTimerActive: false
+                    )
+                    .frame(height: 250)
+                } header: {
+                    Text("Preview")
                 }
                 
-            } header: {
-                Text("Edit Duration")
+                // ✅ Section 2: 新的编辑时长方式
+                Section {
+                    // 使用 LabeledContent 提供一个清晰的标签和内容布局
+                    LabeledContent {
+                        // 显示格式化后的当前时长
+                        Text(recipeStep.duration.formattedString)
+                            .foregroundStyle(.link)
+                    } label: {
+                        Text("Duration")
+                            .font(.headline)
+                    }
+                    .contentShape(Rectangle()) // 让整个区域都可点击
+                    .onTapGesture {
+                        isShowingPicker = true // 点击时显示 popover
+                    }
+                    
+                } header: {
+                    Text("Edit Duration")
+                }
             }
         }
-        .navigationTitle("Set Timer")
-        // 核心：popover 修改器
         .popover(isPresented: $isShowingPicker, attachmentAnchor: .point(.center)) {
             // 在 popover 中展示我们的拨轮选择器视图
             DurationPickerView(duration: $recipeStep.duration)
-                // 建议给 popover 设置一个合适的大小
                 .frame(idealWidth: 380, idealHeight: 400)
                 .presentationCompactAdaptation(.popover)
         }
