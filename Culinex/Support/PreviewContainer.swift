@@ -28,6 +28,8 @@ let previewContainer: ModelContainer = {
             for: schema, configurations: config
         )
         
+        DataSetup.createInitialCollections(context: container.mainContext)
+        
         // 插入样本数据
         // 1. 建立 Step <-> Ingredient 的关系
         // 这是最关键和缺失的一步！

@@ -17,7 +17,7 @@ struct FavoritesGridItemView: View {
                 .aspectRatio(1.0, contentMode: .fit)
                 .overlay {
                     GeometryReader { geometry in
-                        Image(systemName: "book.closed")
+                        Image(systemName: "heart.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: geometry.size.width / 2, height: geometry.size.height / 2)

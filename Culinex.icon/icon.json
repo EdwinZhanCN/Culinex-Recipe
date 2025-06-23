@@ -10,12 +10,9 @@
       "layers" : [
         {
           "fill" : {
-            "linear-gradient" : [
-              "display-p3:1.00000,0.35706,0.04669,1.00000",
-              "display-p3:1.00000,0.60452,0.32263,1.00000"
-            ]
+            "solid" : "display-p3:0.83947,0.35839,0.00000,1.00000"
           },
-          "glass" : true,
+          "glass" : false,
           "image-name" : "carrot.png",
           "name" : "carrot",
           "position" : {
@@ -25,7 +22,19 @@
               -56
             ]
           }
-        },
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
         {
           "image-name" : "Component 48.png",
           "name" : "Component 48",

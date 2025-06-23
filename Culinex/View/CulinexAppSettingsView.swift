@@ -62,13 +62,13 @@ struct CulinexAppSettingsView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                Section(header: Text("Intelligence"), footer: Text("Use Apple native intelligence to enhance your experience.")) {
-                    if #available(iOS 26.0, *) {
-                        GenerativeSettingView()
-                    } else {
-                        Text("Intelligence is available on iOS/iPadOS/MacOS 26.0 and later.")
-                    }
-                }
+//                Section(header: Text("Intelligence"), footer: Text("Use Apple native intelligence to enhance your experience.")) {
+//                    if #available(iOS 26.0, *) {
+//                        GenerativeSettingView()
+//                    } else {
+//                        Text("Intelligence is available on iOS/iPadOS/MacOS 26.0 and later.")
+//                    }
+//                }
             }
             .navigationTitle("Settings") // 设置导航栏标题
             .navigationBarTitleDisplayMode(.inline)

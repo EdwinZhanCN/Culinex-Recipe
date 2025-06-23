@@ -16,7 +16,7 @@ struct StepEditorForm: View {
     @State private var shouldShowBadge: Bool = false
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading) {
             buttonGrid
             Divider()
             contentArea
@@ -63,7 +63,7 @@ struct StepEditorForm: View {
             case .setDescription: SetDescriptionView()
             case .setIngredients: SetIngredientView(recipeStep: recipeStep)
             case .setTools: SetToolsView()
-            case .setTimer: SetTimerView()
+            case .setTimer: SetTimerView(recipeStep: recipeStep)
             case .setSkills: SetSkillView()
             }
         }

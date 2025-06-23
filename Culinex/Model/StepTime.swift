@@ -5,7 +5,7 @@
 //  Created by 詹子昊 on 6/21/25.
 //
 
-struct StepTime: Equatable, Codable {
+struct StepTime: Equatable, Codable, Hashable {
     var value: Double
     var unit: UnitOfTime
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -17,10 +17,20 @@ struct StepTime: Equatable, Codable {
     }
 }
 
-enum UnitOfTime: String, Codable, Equatable {
+enum UnitOfTime: String, Codable, Equatable, CaseIterable, Identifiable {
     case hr
     case min
     case sec
+    
+    var id: Self { self }
+    
+    var displayName: String {
+        switch self {
+        case .hr: "hr"
+        case .min: "min"
+        case .sec: "sec"
+        }
+    }
     
     func toString(value: Double) -> String {
         switch self {
@@ -44,6 +54,25 @@ extension StepTime {
             return self.value * 60   // 1 分钟 = 60 秒
         case .sec:
             return self.value
+        }
+    }
+}
+
+
+extension StepTime {
+    var formattedString: String {
+        // 将总秒数格式化为易于阅读的字符串
+        let totalSeconds = Int(self.durationInSeconds)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = totalSeconds % 60
+        
+        if hours > 0 {
+            return "\(hours)hr \(minutes)min \(seconds)sec"
+        } else if minutes > 0 {
+            return "\(minutes)min \(seconds)sec"
+        } else {
+            return "\(seconds)sec"
         }
     }
 }

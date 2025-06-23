@@ -11,41 +11,71 @@ import SwiftUI
 
 /// A card view for displaying a recipe in a grid layout.
 struct RecipeGridItemView: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var recipe: Recipe
+    @State private var showToast = false
+    @State private var toastMessage = ""
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(Color.dynamicColor(for: recipe.name))
-            // 2. 修复图标变形问题，并让它作为柔和的背景
-            Image(systemName: "carrot.fill") // 使用 .fill 版本可能更好看
-                .resizable()
-                .scaledToFit() // <-- 关键：保持图标的宽高比
-                .foregroundColor(.white.opacity(0.3)) // 降低不透明度
-                .padding(25) // 给图标一些呼吸空间
+        ZStack (alignment: .top){
+            ZStack{
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color.dynamicColor(for: recipe.name))
+                // 2. 修复图标变形问题，并让它作为柔和的背景
+                Image(systemName: "carrot.fill") // 使用 .fill 版本可能更好看
+                    .resizable()
+                    .scaledToFit() // <-- 关键：保持图标的宽高比
+                    .foregroundColor(.white.opacity(0.3)) // 降低不透明度
+                    .padding(25) // 给图标一些呼吸空间
 
-            // 3. 内容层
-            VStack {
-                Header(recipe: recipe)
-                    .padding(.top) // 将 Header 向下推一点
-                Spacer()
-                RecipeInfo(recipe: recipe)
-                    .padding(.horizontal) // 给左右一些边距
-                    .padding(.bottom, 10) // 给底部一些边距
+                // 3. 内容层
+                VStack {
+                    Header(recipe: recipe)
+                        .padding(.top) // 将 Header 向下推一点
+                    Spacer()
+                    RecipeInfo(recipe: recipe)
+                        .padding(.horizontal) // 给左右一些边距
+                        .padding(.bottom, 10) // 给底部一些边距
+                }
+            }
+            .containerShape(.rect(cornerRadius: 20))
+
+            if showToast {
+                ToastView(message: toastMessage)
+                    .transition(.move(edge: .leading).combined(with: .opacity))
+                    .padding(.top, 5)
+                    .onAppear(perform: dismissToastAfterDelay)
             }
         }
         // 4. 使用单一的 containerShape 来定义卡片的最终形状和点击区域
-        .containerShape(.rect(cornerRadius: 20))
         .contextMenu{
             Button{
-                print("Favorite tapped for \(recipe.name)")
+                addCurrentRecipeToFavorites()
             }label: {
-                Label("Add to Favorite", systemImage: "star.fill")
+                Label("Add to Favorites", systemImage: "heart.fill")
                     .foregroundColor(.primary)
                     .font(.title2)
             }
         }
+    }
+    
+    private func addCurrentRecipeToFavorites() {
+        // 视图的职责被大大简化了。
+        // 它只需要调用全局的管理器，而不需要知道任何关于如何获取收藏夹的内部逻辑。
+        let message = FavoritesManager.add(recipe: recipe, toFavoritesIn: modelContext)
         
+        // 使用返回的消息来显示 Toast
+        toastMessage = message
+        withAnimation { showToast = true }
+    }
+    
+    private func dismissToastAfterDelay() {
+        Task {
+            try? await Task.sleep(for: .seconds(2))
+            withAnimation {
+                showToast = false
+            }
+        }
     }
 }
 

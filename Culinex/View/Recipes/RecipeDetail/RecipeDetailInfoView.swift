@@ -8,7 +8,7 @@ import SwiftUI
 import SwiftData
 
 struct RecipeDetailInfoView: View {
-    let recipe: Recipe
+    @Bindable var recipe: Recipe
     
     @AppStorage("quantityDisplayStyle") private var displayStyle: QuantityDisplayStyle = .fraction
 

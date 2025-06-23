@@ -40,7 +40,7 @@ struct RecipeSplitView: View{
             }
             .frame(minWidth: 150)
             .toolbar{
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .automatic) {
                     Button(action: {
                         isPresentingSettings.toggle()
                     }) {

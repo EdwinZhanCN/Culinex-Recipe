@@ -33,6 +33,11 @@ class RecipeStep: Identifiable {
         self.duration = duration
         self.order = order
     }
+    
+    
+    func getTimeInterval() -> TimeInterval {
+        return duration.durationInSeconds
+    }
 }
 
 extension Recipe {

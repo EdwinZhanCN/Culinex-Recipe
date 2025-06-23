@@ -11,14 +11,14 @@ import SwiftData
 @main
 struct Culinex: App {
     let container:ModelContainer
+    @Environment(\.modelContext) private var modelContext
     // navigation path for whole app
     @State private var navigationPath = NavigationPath()
     
     
     var body: some Scene {
         WindowGroup {
-            RecipeSplitView(path: $navigationPath)
-                
+            RecipeSplitView(path: $navigationPath)                
         }
         #if os(macOS)
         .windowStyle(.hiddenTitleBar)

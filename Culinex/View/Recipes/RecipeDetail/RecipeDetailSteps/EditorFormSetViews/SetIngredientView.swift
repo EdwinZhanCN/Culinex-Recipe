@@ -33,7 +33,9 @@ struct SetIngredientView: View {
             }) {
                 ForEach(recipeStep.stepIngredients) { ri in
                     HStack {
-                        Text(ri.ingredient?.name ?? "Unknown")
+                        IngredientCardView(
+                            ingredient: ri.ingredient ?? Ingredient.placeholder
+                        )
                         Spacer()
                         Button("Edit") { editingRecipeIngredient = ri }
                     }
@@ -46,6 +48,7 @@ struct SetIngredientView: View {
                 }
             }
         }
+        .navigationTitle("Set Ingredients")
         .sheet(isPresented: $showPicker) {
             NavigationStack {
                 if availableIngredients.isEmpty {

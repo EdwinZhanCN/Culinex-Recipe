@@ -32,17 +32,31 @@ struct RecipeDetailView: View {
                 recipe: recipe,
                 state: $inspectorState // 同样传递 state 的绑定
             )
-            .inspectorColumnWidth(
-                min: Constants.recipeInspectorMinWidth,
-                ideal: Constants.recipeInspectorIdealWidth,
-                max: Constants.recipeInspectorMaxWidth
-            )
+            .inspectorColumnWidth(225)
         }
         .toolbar {
-            Button {
-                inspectorPresented.toggle()
-            } label: {
-                Label("Toggle Inspector", systemImage: "info.circle")
+            ToolbarItem {
+                Button {
+                    print("Share tapped")
+                } label: {
+                    Label("Recipe Info", systemImage: "square.and.arrow.up")
+                }
+            }
+                        
+            ToolbarItem{
+                Button {
+                    inspectorPresented = true
+                    inspectorState = .idle
+                } label: {
+                    Label("Recipe Info", systemImage: "info")
+                }
+            }
+            ToolbarItem {
+                Button {
+                    inspectorPresented.toggle()
+                } label: {
+                    Label("Toggle Inspector", systemImage: "sidebar.trailing")
+                }
             }
         }
     }

@@ -1,4 +1,3 @@
-//
 //  RecipeDetailInspectorForm.swift
 //  Culinex
 //

@@ -60,9 +60,33 @@ extension Recipe {
         
         // 复用我们之前的格式化逻辑
         func formattedQuantity(using style: QuantityDisplayStyle = .fraction) -> String {
-            // 这里可以简单地调用一个全局函数或写一个简化版的格式化逻辑
-            // 为了简化，我们直接用 String(format:)
-            return String(format: "%.2f", quantity) // 在视图中可以替换为更复杂的逻辑
+            switch style {
+            case .decimal:
+                // 小数样式：最多保留两位小数
+                return String(format: "%.2f", self.quantity)
+            case .fraction:
+                // 分数样式：使用我们之前创建的逻辑
+                let fractions: [Double: String] = [
+                    0.25: "¼", 0.5: "½", 0.75: "¾",
+                    0.333: "⅓", 0.666: "⅔",
+                    0.125: "⅛", 0.375: "⅜", 0.625: "⅝", 0.875: "⅞"
+                ]
+
+                if quantity == floor(quantity) {
+                    return "\(Int(quantity))"
+                }
+
+                let wholePart = Int(floor(quantity))
+                let decimalPart = quantity - Double(wholePart)
+
+                for (decimal, fractionChar) in fractions {
+                    if abs(decimalPart - decimal) < 0.01 {
+                        return wholePart == 0 ? fractionChar : "\(wholePart) \(fractionChar)"
+                    }
+                }
+                // 如果不是常见分数，则回退到小数显示
+                return String(format: "%.2f", self.quantity)
+            }
         }
     }
     

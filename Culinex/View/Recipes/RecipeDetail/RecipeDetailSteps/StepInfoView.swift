@@ -17,14 +17,17 @@ struct StepInfoView: View {
     }
     
     var body: some View {
-        Text("Step \(recipeStep.order+1)")
-            .font(.title)
-            .fontWeight(.bold)
-        Text(recipeStep.descrip)
-            .font(.body)
-            .padding(.bottom, 10)
-        List{
+        VStack(alignment: .center, spacing: 10) {
+            Text("Step\(recipeStep.order+1)")
+                .font(.largeTitle)
+                .fontWeight(.bold)
             
+            Text(recipeStep.descrip)
+                .font(.body)
+                .foregroundColor(.secondary)
+        }
+        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0)) // 让VStack填满行
+        List{
             Section(header: Text("Duration")) {
                 HStack {
                     Image(systemName: "timer")
@@ -46,6 +49,9 @@ struct StepInfoView: View {
                 }
             }
         }
+        .listStyle(.insetGrouped) // 使用分组列表样式，更美观
+        .navigationTitle("Recipe Step Info")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -47,7 +47,7 @@ let tomatoSoupRecipe = Recipe(
 
 // Sample Favorite Collection
 let sampleFavoriteCollection = FavoriteCollection(
-    name: "My Favorite Recipes"
+    name: "Morning Recipes",
 )
 
 
