@@ -14,7 +14,7 @@ struct IngredientGird: View {
     // The search Text on the toolbar
     @State var searchText: String = ""
     let forEditing: Bool
-    
+
     var filteredingredients: [Ingredient] {
         if searchText.isEmpty {
             return ingredients
@@ -22,8 +22,8 @@ struct IngredientGird: View {
             return ingredients.filter { $0.name.localizedStandardContains(searchText) }
         }
     }
-    
-    
+
+
     var body: some View{
         ScrollView {
             LazyVGrid(columns: columns, spacing: 10) {
@@ -33,14 +33,14 @@ struct IngredientGird: View {
                         IngredientCardView(ingredient: ingredient)
                     }
                 }
-                
+
             }
             .navigationTitle("Recipes Library (\(ingredients.count) total)")
             .searchable(text: $searchText)
             .padding(20)
         }
     }
-    
+
     private var columns: [GridItem] {
         if forEditing {
             return [ GridItem(.adaptive(minimum: Constants.ingredientGridItemEditingMinSize,

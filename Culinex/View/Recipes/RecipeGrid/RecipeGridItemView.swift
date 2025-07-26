@@ -15,7 +15,7 @@ struct RecipeGridItemView: View {
     @Bindable var recipe: Recipe
     @State private var showToast = false
     @State private var toastMessage = ""
-    
+
     var body: some View {
         ZStack (alignment: .top){
             ZStack{
@@ -58,17 +58,17 @@ struct RecipeGridItemView: View {
             }
         }
     }
-    
+
     private func addCurrentRecipeToFavorites() {
         // 视图的职责被大大简化了。
         // 它只需要调用全局的管理器，而不需要知道任何关于如何获取收藏夹的内部逻辑。
         let message = FavoritesManager.add(recipe: recipe, toFavoritesIn: modelContext)
-        
+
         // 使用返回的消息来显示 Toast
         toastMessage = message
         withAnimation { showToast = true }
     }
-    
+
     private func dismissToastAfterDelay() {
         Task {
             try? await Task.sleep(for: .seconds(2))
@@ -82,7 +82,7 @@ struct RecipeGridItemView: View {
 /// 顶部标题视图
 struct Header: View {
     var recipe: Recipe
-    
+
     var body: some View {
         HStack{
             Text(recipe.name)
@@ -117,7 +117,7 @@ struct RecipeInfo: View {
         formatter.zeroFormattingBehavior = .dropLeading
         return formatter
     }()
-    
+
     var body: some View {
         // 简化：HStack 只负责布局，具体的圆形样式交给 CircleInfoView
         HStack {
@@ -142,7 +142,7 @@ struct CircleInfoView: View {
         VStack(spacing: 2) {
             Image(systemName: icon)
                 .font(.callout) // 合适的图标大小
-            
+
             Text(info)
                 .font(.caption)
                 .fontWeight(.medium)

@@ -34,7 +34,7 @@ struct RecipeDetailView: View {
                 recipe: recipe,
                 state: $inspectorState // 同样传递 state 的绑定
             )
-            .inspectorColumnWidth(225)
+            .inspectorColumnWidth(350) // 设置检查器列宽
         }
         .sheet(isPresented: $isEditing) {
             RecipeInfoEditingSheet(recipe: recipe)

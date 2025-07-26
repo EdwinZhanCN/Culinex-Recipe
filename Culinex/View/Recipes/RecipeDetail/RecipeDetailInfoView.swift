@@ -7,11 +7,9 @@
 import SwiftUI
 import SwiftData
 
-struct RecipeDetailInfoView: View {
-    @Bindable var recipe: Recipe
+private struct RecipeDetailHeaderView: View {
+    let recipe: Recipe
     
-    @AppStorage("quantityDisplayStyle") private var displayStyle: QuantityDisplayStyle = .fraction
-
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             if let imageData = recipe.Image, let uiImage = UIImage(data: imageData) {
@@ -27,15 +25,30 @@ struct RecipeDetailInfoView: View {
             }
             
             Text(recipe.name)
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.bold)
             
             Text(recipe.summary)
                 .font(.body)
                 .foregroundColor(.secondary)
         }
-        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0)) // 让VStack填满行
+        .padding(.vertical, 5)
+    }
+}
+
+struct RecipeDetailInfoView: View {
+    @Bindable var recipe: Recipe
+    
+    @AppStorage("quantityDisplayStyle") private var displayStyle: QuantityDisplayStyle = .fraction
+
+    var body: some View {
         List {
+            Section {
+                EmptyView()
+            } header: {
+                RecipeDetailHeaderView(recipe: recipe)
+            }
+            
             // MARK: - 摘要信息
             Section {
                 HStack {
@@ -105,3 +118,4 @@ struct RecipeDetailInfoView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+

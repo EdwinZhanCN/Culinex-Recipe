@@ -7,7 +7,7 @@
 import SwiftUI
 import SwiftData
 
-struct StepInfoView: View {
+private struct StepDetailHeaderView: View {
     let recipeStep: RecipeStep
     
     var body: some View {
@@ -20,16 +20,30 @@ struct StepInfoView: View {
                 .font(.body)
                 .foregroundColor(.secondary)
         }
-        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0)) // 让VStack填满行
-        List{
+        .padding(.bottom, 15)
+        .frame(maxWidth: .infinity)
+    }
+}
+
+struct StepInfoView: View {
+    let recipeStep: RecipeStep
+    
+    var body: some View {
+        List {
+            Section {
+                EmptyView()
+            } header: {
+                StepDetailHeaderView(recipeStep: recipeStep)
+            }
+            
             Section(header: Text("Duration")) {
                 HStack {
                     Image(systemName: "timer")
                     Text(recipeStep.duration.formattedString)
                 }
             }
-            Section(header: Text("Ingredients")){
-                ForEach(recipeStep.stepIngredients){ stepIngredient in
+            Section(header: Text("Ingredients")) {
+                ForEach(recipeStep.stepIngredients) { stepIngredient in
                     if let ingredient = stepIngredient.ingredient {
                         IngredientCardView(ingredient: ingredient)
                     } else {
@@ -37,8 +51,8 @@ struct StepInfoView: View {
                     }
                 }
             }
-            Section(header: Text("Skills")){
-                ForEach(recipeStep.skills){ skill in
+            Section(header: Text("Skills")) {
+                ForEach(recipeStep.skills) { skill in
                     SkillCardView(skill: skill)
                 }
             }
@@ -78,3 +92,4 @@ struct StepInfoView: View {
 //        self.order = order
 //    }
 //}
+
